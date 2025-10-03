@@ -1,0 +1,1430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEAVPEAV PECH - Junior Full Stack Developer</title>
+    <link rel="icon" href="favicon.png" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        luxury: {
+                            50: '#fafafa',
+                            100: '#f5f5f5',
+                            200: '#e5e5e5',
+                            300: '#d4d4d4',
+                            400: '#a3a3a3',
+                            500: '#737373',
+                            600: '#525252',
+                            700: '#404040',
+                            800: '#262626',
+                            900: '#171717',
+                            950: '#0a0a0a',
+                        },
+                        gold: {
+                            50: '#fffbeb',
+                            100: '#fef3c7',
+                            200: '#fde68a',
+                            300: '#fcd34d',
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                            700: '#b45309',
+                            800: '#92400e',
+                            900: '#78350f',
+                        },
+                        platinum: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            200: '#e2e8f0',
+                            300: '#cbd5e1',
+                            400: '#94a3b8',
+                            500: '#64748b',
+                            600: '#475569',
+                            700: '#334155',
+                            800: '#1e293b',
+                            900: '#0f172a',
+                        },
+                        accent: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        }
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                        'display': ['Playfair Display', 'serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.6s ease-out',
+                        'slide-up': 'slideUp 0.8s ease-out',
+                        'slide-in-left': 'slideInLeft 0.8s ease-out',
+                        'slide-in-right': 'slideInRight 0.8s ease-out',
+                        'float': 'float 6s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        slideInLeft: {
+                            '0%': { opacity: '0', transform: 'translateX(-30px)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' },
+                        },
+                        slideInRight: {
+                            '0%': { opacity: '0', transform: 'translateX(30px)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        glow: {
+                            '0%': { boxShadow: '0 0 20px rgba(245, 158, 11, 0.3)' },
+                            '100%': { boxShadow: '0 0 30px rgba(245, 158, 11, 0.6)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .glass-dark {
+            background: rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #f59e0b, #d97706, #b45309);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .luxury-gradient {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+        }
+        .gold-gradient {
+            background: linear-gradient(135deg, #f59e0b, #d97706, #b45309);
+        }
+        .text-shadow {
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        .hover-lift {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .hover-lift:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-luxury-50 via-platinum-50 to-luxury-100 text-luxury-900 font-sans antialiased overflow-x-hidden">
+    <!-- Navigation Bar -->
+    <nav class="fixed top-0 w-full glass shadow-2xl z-50 transition-all duration-500 hover:shadow-3xl">
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="flex justify-between items-center py-4 sm:py-6">
+                <h1 class="text-xl sm:text-2xl md:text-3xl font-display font-bold gradient-text tracking-wide">SEAVPEAV PECH</h1>
+                <ul class="hidden md:flex space-x-6 lg:space-x-8 text-luxury-800 font-semibold">
+                    <li><a href="#home" class="text-luxury-800 hover:text-gold-600 transition-all duration-300 hover:scale-105 relative group">
+                        Home
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gold-500 transition-all duration-300 group-hover:w-full"></span>
+                    </a></li>
+                    <li><a href="#about" class="text-luxury-800 hover:text-gold-600 transition-all duration-300 hover:scale-105 relative group">
+                        About
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gold-500 transition-all duration-300 group-hover:w-full"></span>
+                    </a></li>
+                    <li><a href="#education" class="text-luxury-800 hover:text-gold-600 transition-all duration-300 hover:scale-105 relative group">
+                        Education
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gold-500 transition-all duration-300 group-hover:w-full"></span>
+                    </a></li>
+                    <li><a href="#skills" class="text-luxury-800 hover:text-gold-600 transition-all duration-300 hover:scale-105 relative group">
+                        Skills
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gold-500 transition-all duration-300 group-hover:w-full"></span>
+                    </a></li>
+                    <li><a href="#experience" class="text-luxury-800 hover:text-gold-600 transition-all duration-300 hover:scale-105 relative group">
+                        Experience
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gold-500 transition-all duration-300 group-hover:w-full"></span>
+                    </a></li>
+                    <li><a href="#projects" class="text-luxury-800 hover:text-gold-600 transition-all duration-300 hover:scale-105 relative group">
+                        Projects
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gold-500 transition-all duration-300 group-hover:w-full"></span>
+                    </a></li>
+                    <li><a href="#certifications" class="text-luxury-800 hover:text-gold-600 transition-all duration-300 hover:scale-105 relative group">
+                        Certifications
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gold-500 transition-all duration-300 group-hover:w-full"></span>
+                    </a></li>
+                    <li><a href="#contact" class="text-luxury-800 hover:text-gold-600 transition-all duration-300 hover:scale-105 relative group">
+                        Contact
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gold-500 transition-all duration-300 group-hover:w-full"></span>
+                    </a></li>
+                </ul>
+                <!-- Mobile menu button -->
+                <button id="mobile-menu-btn" class="md:hidden text-luxury-800 hover:text-gold-600 transition-colors duration-300">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden bg-white/95 backdrop-blur-md rounded-lg mt-2 p-4 shadow-lg">
+                <ul class="space-y-3 text-luxury-800 font-semibold">
+                    <li><a href="#home" class="block py-2 hover:text-gold-600 transition-colors duration-300">Home</a></li>
+                    <li><a href="#about" class="block py-2 hover:text-gold-600 transition-colors duration-300">About</a></li>
+                    <li><a href="#education" class="block py-2 hover:text-gold-600 transition-colors duration-300">Education</a></li>
+                    <li><a href="#skills" class="block py-2 hover:text-gold-600 transition-colors duration-300">Skills</a></li>
+                    <li><a href="#experience" class="block py-2 hover:text-gold-600 transition-colors duration-300">Experience</a></li>
+                    <li><a href="#projects" class="block py-2 hover:text-gold-600 transition-colors duration-300">Projects</a></li>
+                    <li><a href="#certifications" class="block py-2 hover:text-gold-600 transition-colors duration-300">Certifications</a></li>
+                    <li><a href="#contact" class="block py-2 hover:text-gold-600 transition-colors duration-300">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero / Home Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center luxury-gradient text-white relative overflow-hidden">
+        <!-- Animated background elements -->
+        <div class="absolute inset-0">
+            <div class="absolute top-4 left-4 w-32 h-32 sm:w-72 sm:h-72 bg-gold-500/10 rounded-full blur-3xl animate-float"></div>
+            <div class="absolute bottom-4 right-4 w-40 h-40 sm:w-96 sm:h-96 bg-accent-500/10 rounded-full blur-3xl animate-float" style="animation-delay: -3s;"></div>
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 sm:w-64 sm:h-64 bg-gold-400/5 rounded-full blur-2xl animate-float" style="animation-delay: -1.5s;"></div>
+        </div>
+        
+        <!-- Gradient overlay -->
+        <div class="absolute inset-0 bg-gradient-to-br from-platinum-900/30 via-transparent to-luxury-900/40"></div>
+        
+        <div class="container mx-auto px-4 sm:px-6 relative z-10 animate-fade-in">
+            <div class="grid lg:grid-cols-2 gap-6 sm:gap-8 md:gap-12 items-center min-h-[70vh] sm:min-h-[80vh]">
+                <!-- Left side - Profile image -->
+                <div class="flex justify-center lg:justify-start animate-slide-in-left order-2 lg:order-1">
+                    <div class="relative">
+                        <div class="w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 xl:w-72 xl:h-72 relative">
+                            <div class="absolute inset-0 bg-gold-gradient rounded-full animate-glow"></div>
+                            <img src="assets/images/profile.jpg" alt="Profile Picture" class="w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 xl:w-72 xl:h-72 rounded-full relative z-10 shadow-2xl border-4 border-white/20 hover-lift object-cover">
+                        </div>
+                        <!-- Floating elements around profile -->
+                        <div class="absolute -top-1 -right-1 sm:-top-2 sm:-right-2 w-4 h-4 sm:w-6 sm:h-6 bg-gold-500 rounded-full animate-float"></div>
+                        <div class="absolute -bottom-1 -left-1 sm:-bottom-2 sm:-left-2 w-3 h-3 sm:w-4 sm:h-4 bg-accent-500 rounded-full animate-float" style="animation-delay: -2s;"></div>
+                    </div>
+                </div>
+                
+                <!-- Right side - Text content -->
+                <div class="text-center lg:text-left animate-slide-in-right order-1 lg:order-2">
+                    <!-- Main heading with luxury typography -->
+                    <h3 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-display font-bold mb-3 sm:mb-4 md:mb-6 text-shadow" style="animation-delay: 0.2s;">
+                        SEAVPEAV PECH
+                    </h3>
+                    
+                    <!-- Subtitle with gradient text -->
+                    <p class="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl mb-4 sm:mb-6 md:mb-8 font-light tracking-wide" style="animation-delay: 0.4s;">
+                        <span class="gradient-text font-medium">Junior Full Stack Developer</span>
+                    </p>
+                    
+                    <!-- Description with glass effect -->
+                    <div class="glass-dark rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-6 lg:p-8 mb-4 sm:mb-6 md:mb-8" style="animation-delay: 0.6s;">
+                        <p class="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed text-white/90">
+                            As a passionate recent graduate from the National Institute of Business, I bring hands-on experience in web and software development through school projects, personal initiatives, and an enriching exchange program in Singapore. Eager to contribute to innovative teams.
+                        </p>
+                    </div>
+                    
+                    <!-- Call to action buttons -->
+                    <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-6 justify-center lg:justify-start" style="animation-delay: 0.8s;">
+                        <a href="#projects" class="px-4 sm:px-6 md:px-8 py-2 sm:py-3 md:py-4 bg-gold-gradient text-white font-semibold rounded-full hover-lift shadow-2xl transition-all duration-300 hover:shadow-gold-500/25 text-xs sm:text-sm md:text-base w-full sm:w-auto text-center">
+                            <i class="fas fa-code mr-2"></i>
+                            View My Work
+                        </a>
+                        <a href="#contact" class="px-4 sm:px-6 md:px-8 py-2 sm:py-3 md:py-4 glass text-white font-semibold rounded-full hover-lift border border-white/20 transition-all duration-300 text-xs sm:text-sm md:text-base w-full sm:w-auto text-center">
+                            <i class="fas fa-envelope mr-2"></i>
+                            Get In Touch
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <i class="fas fa-chevron-down text-xl sm:text-2xl text-white/60"></i>
+        </div>
+    </section>
+
+    <!-- About Me Section -->
+    <section id="about" class="py-32 relative overflow-hidden">
+        <!-- Background decoration -->
+        <div class="absolute inset-0 bg-gradient-to-br from-luxury-50 via-white to-platinum-50"></div>
+        <div class="absolute top-20 right-20 w-64 h-64 bg-gold-100/30 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-20 left-20 w-80 h-80 bg-accent-100/30 rounded-full blur-3xl"></div>
+        
+        <div class="container mx-auto px-4 sm:px-6 relative z-10">
+            <div class="text-center mb-12 sm:mb-16 md:mb-20">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-4 sm:mb-6 text-luxury-900">
+                    About <span class="gradient-text">Me</span>
+                </h2>
+                <div class="w-16 sm:w-20 md:w-24 h-1 bg-gold-gradient mx-auto rounded-full"></div>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-center">
+                <!-- Left side - Description -->
+                <div class="space-y-6 sm:space-y-8 animate-slide-in-left">
+                    <div class="glass rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 hover-lift">
+                        <p class="text-base sm:text-lg md:text-xl leading-relaxed text-luxury-700 mb-6 sm:mb-8">
+                            I am a recent graduate from the National Institute of Business, passionate about web and software development. I have hands-on experience through school projects, personal projects, and an exchange program in Singapore. My interests are in software engineering, front-end, back-end, and full-stack development. I am eager to apply my skills in a professional environment.
+                        </p>
+                        
+                        <!-- Key highlights -->
+                        <div class="grid grid-cols-2 gap-4 sm:gap-6">
+                            <div class="text-center">
+                                <div class="text-2xl sm:text-3xl font-bold text-gold-600 mb-1 sm:mb-2">7+</div>
+                                <div class="text-sm sm:text-base text-luxury-600 font-medium">Projects Built</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl sm:text-3xl font-bold text-gold-600 mb-1 sm:mb-2">3+</div>
+                                <div class="text-sm sm:text-base text-luxury-600 font-medium">Years Experience <br>(Academic + Personal)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right side - Contact cards -->
+                <div class="space-y-4 sm:space-y-6 animate-slide-in-right">
+                    <div class="glass rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 hover-lift border border-gold-200/50">
+                        <div class="flex items-center mb-3 sm:mb-4">
+                            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-gold-gradient rounded-lg sm:rounded-xl flex items-center justify-center mr-3 sm:mr-4">
+                                <i class="fas fa-envelope text-white text-lg sm:text-xl"></i>
+                            </div>
+                            <h3 class="text-lg sm:text-xl font-semibold text-luxury-900">Email</h3>
+                        </div>
+                        <p class="text-sm sm:text-base md:text-lg text-luxury-600 break-all">seavpeavpech24@gmail.com</p>
+                    </div>
+                    
+                    <div class="glass rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 hover-lift border border-gold-200/50">
+                        <div class="flex items-center mb-3 sm:mb-4">
+                            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-gold-gradient rounded-lg sm:rounded-xl flex items-center justify-center mr-3 sm:mr-4">
+                                <i class="fas fa-project-diagram text-white text-lg sm:text-xl"></i>
+                            </div>
+                            <h3 class="text-lg sm:text-xl font-semibold text-luxury-900">Projects Built</h3>
+                        </div>
+                        <p class="text-sm sm:text-base md:text-lg text-luxury-600">7+ Professional Projects</p>
+                    </div>
+                    
+                    <div class="glass rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 hover-lift border border-gold-200/50">
+                        <div class="flex items-center mb-3 sm:mb-4">
+                            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-gold-gradient rounded-lg sm:rounded-xl flex items-center justify-center mr-3 sm:mr-4">
+                                <i class="fas fa-graduation-cap text-white text-lg sm:text-xl"></i>
+                            </div>
+                            <h3 class="text-lg sm:text-xl font-semibold text-luxury-900">Education</h3>
+                        </div>
+                        <p class="text-sm sm:text-base md:text-lg text-luxury-600">Bachelor's in IT (Software Development)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-32 relative overflow-hidden">
+        <!-- Background -->
+        <div class="absolute inset-0 bg-gradient-to-br from-platinum-100 via-luxury-50 to-gold-50/30"></div>
+        <div class="absolute top-10 left-10 w-96 h-96 bg-gold-200/20 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-10 right-10 w-80 h-80 bg-accent-200/20 rounded-full blur-3xl"></div>
+        
+        <div class="container mx-auto px-4 sm:px-6 relative z-10">
+            <div class="text-center mb-12 sm:mb-16 md:mb-20">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-4 sm:mb-6 text-luxury-900">
+                    <span class="gradient-text">Education</span>
+                </h2>
+                <div class="w-16 sm:w-20 md:w-24 h-1 bg-gold-gradient mx-auto rounded-full"></div>
+            </div>
+            
+            <div class="max-w-6xl mx-auto">
+                <!-- Timeline -->
+                <div class="relative">
+                    <!-- Timeline line - hidden on mobile -->
+                    <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gold-gradient rounded-full"></div>
+                    
+                    <!-- University -->
+                    <div class="flex flex-col md:flex-row items-center mb-12 sm:mb-16 animate-slide-in-left">
+                        <div class="w-full md:w-1/2 md:pr-12 text-center md:text-right mb-6 md:mb-0">
+                            <div class="glass rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 hover-lift">
+                                <div class="flex flex-col md:flex-row items-center md:justify-end mb-4">
+                                    <div class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-gold-gradient rounded-full flex items-center justify-center mr-0 md:mr-4 mb-3 md:mb-0">
+                                        <i class="fas fa-university text-white text-lg sm:text-xl md:text-2xl"></i>
+                                    </div>
+                                    <div class="text-center md:text-right">
+                                        <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-luxury-900">National Institute of Business</h3>
+                                        <p class="text-gold-600 font-semibold text-sm sm:text-base">2020 – 2025</p>
+                                    </div>
+                                </div>
+                                <p class="text-sm sm:text-base text-luxury-700 leading-relaxed">
+                                    Bachelor's Degree in IT (Software Development). Gained comprehensive knowledge in software engineering, web technologies, and programming through rigorous coursework and collaborative projects.
+                                </p>
+                                <div class="mt-4 flex flex-wrap gap-2 justify-center md:justify-end">
+                                    <span class="px-2 sm:px-3 py-1 bg-gold-100 text-gold-800 rounded-full text-xs sm:text-sm font-medium">Software Engineering</span>
+                                    <span class="px-2 sm:px-3 py-1 bg-gold-100 text-gold-800 rounded-full text-xs sm:text-sm font-medium">Web Development</span>
+                                    <span class="px-2 sm:px-3 py-1 bg-gold-100 text-gold-800 rounded-full text-xs sm:text-sm font-medium">Programming</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-6 h-6 sm:w-8 sm:h-8 bg-gold-gradient rounded-full border-4 border-white shadow-lg z-10 hidden md:block"></div>
+                        <div class="w-full md:w-1/2 md:pl-12 hidden md:block"></div>
+                    </div>
+                    
+                    <!-- High School -->
+                    <div class="flex flex-col md:flex-row items-center animate-slide-in-right">
+                        <div class="w-full md:w-1/2 md:pr-12 hidden md:block"></div>
+                        <div class="w-6 h-6 sm:w-8 sm:h-8 bg-gold-gradient rounded-full border-4 border-white shadow-lg z-10 hidden md:block"></div>
+                        <div class="w-full md:w-1/2 md:pl-12 text-center md:text-left">
+                            <div class="glass rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 hover-lift">
+                                <div class="flex flex-col md:flex-row items-center mb-4">
+                                    <div class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-gold-gradient rounded-full flex items-center justify-center mr-0 md:mr-4 mb-3 md:mb-0">
+                                        <i class="fas fa-graduation-cap text-white text-lg sm:text-xl md:text-2xl"></i>
+                                    </div>
+                                    <div class="text-center md:text-left">
+                                        <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-luxury-900">High School</h3>
+                                        <p class="text-gold-600 font-semibold text-sm sm:text-base">2017 – 2020</p>
+                                    </div>
+                                </div>
+                                <p class="text-sm sm:text-base text-luxury-700 leading-relaxed">
+                                    Completed secondary education with a strong focus on mathematics and sciences, building a solid foundation for technical studies and fostering analytical thinking skills.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-32 relative overflow-hidden">
+        <!-- Background -->
+        <div class="absolute inset-0 bg-gradient-to-br from-luxury-900 via-platinum-900 to-luxury-800"></div>
+        <div class="absolute top-20 right-20 w-96 h-96 bg-gold-500/10 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-20 left-20 w-80 h-80 bg-accent-500/10 rounded-full blur-3xl"></div>
+        
+        <div class="container mx-auto px-4 sm:px-6 relative z-10">
+            <div class="text-center mb-12 sm:mb-16 md:mb-20">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-4 sm:mb-6 text-white">
+                    My <span class="gradient-text">Skills</span>
+                </h2>
+                <div class="w-16 sm:w-20 md:w-24 h-1 bg-gold-gradient mx-auto rounded-full"></div>
+            </div>
+            
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                <!-- Web Development -->
+                <div class="glass-dark rounded-3xl p-8 hover-lift animate-slide-in-left">
+                    <div class="text-center mb-8">
+                        <div class="w-20 h-20 bg-gold-gradient rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-globe text-white text-3xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-2">Web Development</h3>
+                        <p class="text-white/70">Frontend & Backend Technologies</p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <!-- Left Column -->
+                        <div class="space-y-3">
+                            <div class="glass rounded-xl p-3 hover:scale-105 transition-transform duration-300">
+                                <div class="flex items-center">
+                                    <i class="fab fa-html5 text-gold-400 mr-3"></i>
+                                    <div class="text-white font-medium">HTML</div>
+                                </div>
+                            </div>
+                            <div class="glass rounded-xl p-3 hover:scale-105 transition-transform duration-300">
+                                <div class="flex items-center">
+                                    <i class="fab fa-js-square text-gold-400 mr-3"></i>
+                                    <div class="text-white font-medium">JavaScript</div>
+                                </div>
+                            </div>
+                            <div class="glass rounded-xl p-3 hover:scale-105 transition-transform duration-300">
+                                <div class="flex items-center">
+                                    <i class="fab fa-laravel text-gold-400 mr-3"></i>
+                                    <div class="text-white font-medium">Laravel</div>
+                                </div>
+                            </div>
+                            <div class="glass rounded-xl p-3 hover:scale-105 transition-transform duration-300">
+                                <div class="flex items-center">
+                                    <i class="fas fa-layer-group text-gold-400 mr-3"></i>
+                                    <div class="text-white font-medium">Next.js</div>
+                                </div>
+                            </div>
+                            <div class="glass rounded-xl p-3 hover:scale-105 transition-transform duration-300">
+                                <div class="flex items-center">
+                                    <i class="fas fa-paint-brush text-gold-400 mr-3"></i>
+                                    <div class="text-white font-medium">Tailwind CSS</div>
+                                </div>
+                            </div>
+                            <div class="glass rounded-xl p-3 hover:scale-105 transition-transform duration-300">
+                                <div class="flex items-center">
+                                    <i class="fas fa-database text-gold-400 mr-3"></i>
+                                    <div class="text-white font-medium">MySQL</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Right Column -->
+                        <div class="space-y-3">
+                            <div class="glass rounded-xl p-3 hover:scale-105 transition-transform duration-300">
+                                <div class="flex items-center">
+                                    <i class="fab fa-css3-alt text-gold-400 mr-3"></i>
+                                    <div class="text-white font-medium">CSS</div>
+                                </div>
+                            </div>
+                            <div class="glass rounded-xl p-3 hover:scale-105 transition-transform duration-300">
+                                <div class="flex items-center">
+                                    <i class="fab fa-php text-gold-400 mr-3"></i>
+                                    <div class="text-white font-medium">PHP</div>
+                                </div>
+                            </div>
+                            <div class="glass rounded-xl p-3 hover:scale-105 transition-transform duration-300">
+                                <div class="flex items-center">
+                                    <i class="fab fa-react text-gold-400 mr-3"></i>
+                                    <div class="text-white font-medium">React.js</div>
+                                </div>
+                            </div>
+                            <div class="glass rounded-xl p-3 hover:scale-105 transition-transform duration-300">
+                                <div class="flex items-center">
+                                    <i class="fab fa-node-js text-gold-400 mr-3"></i>
+                                    <div class="text-white font-medium">Node.js</div>
+                                </div>
+                            </div>
+                            <div class="glass rounded-xl p-3 hover:scale-105 transition-transform duration-300">
+                                <div class="flex items-center">
+                                    <i class="fab fa-bootstrap text-gold-400 mr-3"></i>
+                                    <div class="text-white font-medium">Bootstrap</div>
+                                </div>
+                            </div>
+                            <div class="glass rounded-xl p-3 hover:scale-105 transition-transform duration-300">
+                                <div class="flex items-center">
+                                    <i class="fas fa-server text-gold-400 mr-3"></i>
+                                    <div class="text-white font-medium">phpMyAdmin</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Desktop Applications -->
+                <div class="glass-dark rounded-3xl p-8 hover-lift animate-slide-up">
+                    <div class="text-center mb-8">
+                        <div class="w-20 h-20 bg-gold-gradient rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-desktop text-white text-3xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-2">Desktop Applications</h3>
+                        <p class="text-white/70">Programming Languages</p>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="glass rounded-xl p-3 hover:scale-105 transition-transform duration-300">
+                            <div class="flex items-center">
+                                <i class="fas fa-code text-gold-400 mr-3"></i>
+                                <div class="text-white font-medium">C</div>
+                            </div>
+                        </div>
+                        <div class="glass rounded-xl p-3 hover:scale-105 transition-transform duration-300">
+                            <div class="flex items-center">
+                                <i class="fas fa-code text-gold-400 mr-3"></i>
+                                <div class="text-white font-medium">C++</div>
+                            </div>
+                        </div>
+                        <div class="glass rounded-xl p-3 hover:scale-105 transition-transform duration-300">
+                            <div class="flex items-center">
+                                <i class="fab fa-microsoft text-gold-400 mr-3"></i>
+                                <div class="text-white font-medium">C#</div>
+                            </div>
+                        </div>
+                        <div class="glass rounded-xl p-3 hover:scale-105 transition-transform duration-300">
+                            <div class="flex items-center">
+                                <i class="fab fa-java text-gold-400 mr-3"></i>
+                                <div class="text-white font-medium">Java</div>
+                            </div>
+                        </div>
+                        <div class="glass rounded-xl p-3 hover:scale-105 transition-transform duration-300">
+                            <div class="flex items-center">
+                                <i class="fab fa-microsoft text-gold-400 mr-3"></i>
+                                <div class="text-white font-medium">VB.Net</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Design & Editing -->
+                <div class="glass-dark rounded-3xl p-8 hover-lift animate-slide-in-right">
+                    <div class="text-center mb-8">
+                        <div class="w-20 h-20 bg-gold-gradient rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-palette text-white text-3xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-2">Design & Editing</h3>
+                        <p class="text-white/70">Creative & Visual Design</p>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="glass rounded-xl p-3 hover:scale-105 transition-transform duration-300">
+                            <div class="flex items-center">
+                                <i class="fas fa-paint-brush text-gold-400 mr-3"></i>
+                                <div class="text-white font-medium">Photoshop</div>
+                            </div>
+                        </div>
+                        <div class="glass rounded-xl p-3 hover:scale-105 transition-transform duration-300">
+                            <div class="flex items-center">
+                                <i class="fas fa-vector-square text-gold-400 mr-3"></i>
+                                <div class="text-white font-medium">Illustrator</div>
+                            </div>
+                        </div>
+                        <div class="glass rounded-xl p-3 hover:scale-105 transition-transform duration-300">
+                            <div class="flex items-center">
+                                <i class="fas fa-palette text-gold-400 mr-3"></i>
+                                <div class="text-white font-medium">Canva</div>
+                            </div>
+                        </div>
+                        <div class="glass rounded-xl p-3 hover:scale-105 transition-transform duration-300">
+                            <div class="flex items-center">
+                                <i class="fas fa-video text-gold-400 mr-3"></i>
+                                <div class="text-white font-medium">CapCut</div>
+                            </div>
+                        </div>
+                        <div class="glass rounded-xl p-3 hover:scale-105 transition-transform duration-300">
+                            <div class="flex items-center">
+                                <i class="fab fa-figma text-gold-400 mr-3"></i>
+                                <div class="text-white font-medium">Figma</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Other Tools -->
+                <div class="glass-dark rounded-3xl p-8 hover-lift animate-slide-in-left">
+                    <div class="text-center mb-8">
+                        <div class="w-20 h-20 bg-gold-gradient rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-tools text-white text-3xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-2">Other Tools</h3>
+                        <p class="text-white/70">Development & Productivity</p>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="glass rounded-xl p-3 hover:scale-105 transition-transform duration-300">
+                            <div class="flex items-center">
+                                <i class="fab fa-github text-gold-400 mr-3"></i>
+                                <div class="text-white font-medium">GitHub</div>
+                            </div>
+                        </div>
+                        <div class="glass rounded-xl p-3 hover:scale-105 transition-transform duration-300">
+                            <div class="flex items-center">
+                                <i class="fas fa-code text-gold-400 mr-3"></i>
+                                <div class="text-white font-medium">VS Code</div>
+                            </div>
+                        </div>
+                        <div class="glass rounded-xl p-3 hover:scale-105 transition-transform duration-300">
+                            <div class="flex items-center">
+                                <i class="fas fa-laptop-code text-gold-400 mr-3"></i>
+                                <div class="text-white font-medium">Visual Studio</div>
+                            </div>
+                        </div>
+                        <div class="glass rounded-xl p-3 hover:scale-105 transition-transform duration-300">
+                            <div class="flex items-center">
+                                <i class="fas fa-robot text-gold-400 mr-3"></i>
+                                <div class="text-white font-medium">Cursor AI</div>
+                            </div>
+                        </div>
+                        <div class="glass rounded-xl p-3 hover:scale-105 transition-transform duration-300">
+                            <div class="flex items-center">
+                                <i class="fas fa-brain text-gold-400 mr-3"></i>
+                                <div class="text-white font-medium">Trae AI</div>
+                            </div>
+                        </div>
+                        <div class="glass rounded-xl p-3 hover:scale-105 transition-transform duration-300">
+                            <div class="flex items-center">
+                                <i class="fas fa-fire text-gold-400 mr-3"></i>
+                                <div class="text-white font-medium">Firebase</div>
+                            </div>
+                        </div>
+                        <div class="glass rounded-xl p-3 hover:scale-105 transition-transform duration-300">
+                            <div class="flex items-center">
+                                <i class="fas fa-mobile-alt text-gold-400 mr-3"></i>
+                                <div class="text-white font-medium">Flutter</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Soft Skills -->
+                <div class="glass-dark rounded-3xl p-8 hover-lift animate-slide-in-right">
+                    <div class="text-center mb-8">
+                        <div class="w-20 h-20 bg-gold-gradient rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-users text-white text-3xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-2">Soft Skills</h3>
+                        <p class="text-white/70">Personal & Professional</p>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="glass rounded-xl p-3 hover:scale-105 transition-transform duration-300">
+                            <div class="flex items-center">
+                                <i class="fas fa-lightbulb text-gold-400 mr-3"></i>
+                                <div class="text-white font-medium">Problem Solving</div>
+                            </div>
+                        </div>
+                        <div class="glass rounded-xl p-3 hover:scale-105 transition-transform duration-300">
+                            <div class="flex items-center">
+                                <i class="fas fa-users text-gold-400 mr-3"></i>
+                                <div class="text-white font-medium">Teamwork</div>
+                            </div>
+                        </div>
+                        <div class="glass rounded-xl p-3 hover:scale-105 transition-transform duration-300">
+                            <div class="flex items-center">
+                                <i class="fas fa-comments text-gold-400 mr-3"></i>
+                                <div class="text-white font-medium">Communication</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-16 sm:py-24 md:py-32 relative overflow-hidden">
+        <!-- Background -->
+        <div class="absolute inset-0 bg-gradient-to-br from-luxury-50 via-white to-platinum-50"></div>
+        <div class="absolute top-4 left-4 w-32 h-32 sm:top-20 sm:left-20 w-64 sm:w-96 h-64 sm:h-96 bg-gold-100/30 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-4 right-4 w-24 h-24 sm:bottom-20 sm:right-20 w-48 sm:w-80 h-48 sm:h-80 bg-accent-100/30 rounded-full blur-3xl"></div>
+        
+        <div class="container mx-auto px-4 sm:px-6 relative z-10">
+            <div class="text-center mb-12 sm:mb-16 md:mb-20">
+                <h2 class="text-4xl sm:text-5xl md:text-6xl font-display font-bold mb-4 sm:mb-6 text-luxury-900">
+                    Work <span class="gradient-text">Experience</span>
+                </h2>
+                <div class="w-16 sm:w-24 h-1 bg-gold-gradient mx-auto rounded-full"></div>
+            </div>
+            
+            <div class="max-w-4xl sm:max-w-5xl mx-auto">
+                <!-- Timeline -->
+                <div class="relative">
+                    <!-- Timeline line -->
+                    <div class="absolute left-6 sm:left-8 top-0 bottom-0 w-1 bg-gold-gradient rounded-full hidden sm:block"></div>
+                    
+                    <!-- Experience 1 -->
+                    <div class="relative flex flex-col sm:flex-row sm:items-start mb-8 sm:mb-12 animate-slide-in-left">
+                        <div class="flex justify-center sm:justify-start mb-4 sm:mb-0 sm:mr-6 sm:mr-8 w-12 h-12 sm:w-16 sm:h-16 bg-gold-gradient rounded-full flex items-center justify-center z-10 shadow-lg">
+                            <i class="fas fa-building text-white text-base sm:text-xl"></i>
+                        </div>
+                        <div class="flex-1 glass rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 hover-lift w-full">
+                            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3 sm:mb-4">
+                                <h3 class="text-xl sm:text-2xl font-bold text-luxury-900 mb-2 sm:mb-0">Aura Condominium</h3>
+                                <span class="text-gold-600 font-semibold bg-gold-100 px-3 sm:px-4 py-1 sm:py-2 rounded-full text-xs sm:text-sm self-center sm:self-auto">Jan 2024 – Oct 2024</span>
+                            </div>
+                            <h4 class="text-lg sm:text-xl font-semibold text-luxury-700 mb-2 sm:mb-3">Receptionist</h4>
+                            <p class="text-luxury-600 leading-relaxed text-sm sm:text-base">
+                                Assisted clients and managed front desk operations, ensuring smooth guest experiences and efficient administrative tasks. Developed strong customer service skills and attention to detail in a professional environment.
+                            </p>
+                            <div class="mt-3 sm:mt-4 flex flex-wrap gap-2">
+                                <span class="px-2 sm:px-3 py-1 bg-gold-100 text-gold-800 rounded-full text-xs sm:text-sm font-medium">Customer Service</span>
+                                <span class="px-2 sm:px-3 py-1 bg-gold-100 text-gold-800 rounded-full text-xs sm:text-sm font-medium">Administrative</span>
+                                <span class="px-2 sm:px-3 py-1 bg-gold-100 text-gold-800 rounded-full text-xs sm:text-sm font-medium">Communication</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Experience 2 -->
+                    <div class="relative flex flex-col sm:flex-row sm:items-start mb-8 sm:mb-12 animate-slide-in-right">
+                        <div class="flex justify-center sm:justify-start mb-4 sm:mb-0 sm:mr-6 sm:mr-8 w-12 h-12 sm:w-16 sm:h-16 bg-gold-gradient rounded-full flex items-center justify-center z-10 shadow-lg">
+                            <i class="fas fa-hotel text-white text-base sm:text-xl"></i>
+                        </div>
+                        <div class="flex-1 glass rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 hover-lift w-full">
+                            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3 sm:mb-4">
+                                <h3 class="text-xl sm:text-2xl font-bold text-luxury-900 mb-2 sm:mb-0">Angkor Khmer Guest House</h3>
+                                <span class="text-gold-600 font-semibold bg-gold-100 px-3 sm:px-4 py-1 sm:py-2 rounded-full text-xs sm:text-sm self-center sm:self-auto">Nov 2024 – Jul 2025</span>
+                            </div>
+                            <h4 class="text-lg sm:text-xl font-semibold text-luxury-700 mb-2 sm:mb-3">Receptionist</h4>
+                            <p class="text-luxury-600 leading-relaxed text-sm sm:text-base">
+                                Provided exceptional customer service and coordinated guest activities, enhancing operational efficiency in a hospitality setting. Gained valuable experience in guest relations and operational management.
+                            </p>
+                            <div class="mt-3 sm:mt-4 flex flex-wrap gap-2">
+                                <span class="px-2 sm:px-3 py-1 bg-gold-100 text-gold-800 rounded-full text-xs sm:text-sm font-medium">Hospitality</span>
+                                <span class="px-2 sm:px-3 py-1 bg-gold-100 text-gold-800 rounded-full text-xs sm:text-sm font-medium">Guest Relations</span>
+                                <span class="px-2 sm:px-3 py-1 bg-gold-100 text-gold-800 rounded-full text-xs sm:text-sm font-medium">Operations</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Experience 3 -->
+                    <div class="relative flex flex-col sm:flex-row sm:items-start animate-slide-in-left">
+                        <div class="flex justify-center sm:justify-start mb-4 sm:mb-0 sm:mr-6 sm:mr-8 w-12 h-12 sm:w-16 sm:h-16 bg-gold-gradient rounded-full flex items-center justify-center z-10 shadow-lg">
+                            <i class="fas fa-graduation-cap text-white text-base sm:text-xl"></i>
+                        </div>
+                        <div class="flex-1 glass rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 hover-lift w-full">
+                            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3 sm:mb-4">
+                                <h3 class="text-xl sm:text-2xl font-bold text-luxury-900 mb-2 sm:mb-0">ACU (Anti-Corruption Unit)</h3>
+                                <span class="text-gold-600 font-semibold bg-gold-100 px-3 sm:px-4 py-1 sm:py-2 rounded-full text-xs sm:text-sm self-center sm:self-auto">2022, 2023, 2025</span>
+                            </div>
+                            <h4 class="text-lg sm:text-xl font-semibold text-luxury-700 mb-2 sm:mb-3">Bac II Examination Observer</h4>
+                            <p class="text-luxury-600 leading-relaxed text-sm sm:text-base">
+                                Participated three times in the national Bac II examination as an ACU member observer for grade 12 students finishing high school. Ensured exam integrity, contributed to fair academic processes, and supported educational standards while demonstrating commitment to academic excellence and ethical practices.
+                            </p>
+                            <div class="mt-3 sm:mt-4 flex flex-wrap gap-2">
+                                <span class="px-2 sm:px-3 py-1 bg-gold-100 text-gold-800 rounded-full text-xs sm:text-sm font-medium">Volunteering</span>
+                                <span class="px-2 sm:px-3 py-1 bg-gold-100 text-gold-800 rounded-full text-xs sm:text-sm font-medium">Academic Integrity</span>
+                                <span class="px-2 sm:px-3 py-1 bg-gold-100 text-gold-800 rounded-full text-xs sm:text-sm font-medium">Education</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-16 sm:py-24 md:py-32 relative overflow-hidden">
+        <!-- Background -->
+        <div class="absolute inset-0 bg-gradient-to-br from-luxury-900 via-platinum-900 to-luxury-800"></div>
+        <div class="absolute top-4 left-4 w-32 h-32 sm:top-20 sm:left-20 sm:w-96 sm:h-96 bg-gold-500/10 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-4 right-4 w-24 h-24 sm:bottom-20 sm:right-20 sm:w-80 sm:h-80 bg-accent-500/10 rounded-full blur-3xl"></div>
+        
+        <div class="container mx-auto px-4 sm:px-6 relative z-10">
+            <div class="text-center mb-8 sm:mb-12 md:mb-16 lg:mb-20">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-display font-bold mb-3 sm:mb-4 md:mb-6 text-white">
+                    My <span class="gradient-text">Projects</span>
+                </h2>
+                <div class="w-12 sm:w-16 md:w-20 lg:w-24 h-1 bg-gold-gradient mx-auto rounded-full"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
+                <!-- PEW POS Management System -->
+                <div class="glass-dark rounded-2xl sm:rounded-3xl overflow-hidden hover-lift animate-slide-in-left group">
+                    <div class="relative overflow-hidden">
+                        <div class="w-full h-32 sm:h-40 md:h-48 bg-gradient-to-br from-gold-500 to-gold-700 flex items-center justify-center">
+                            <i class="fas fa-cash-register text-white text-2xl sm:text-4xl md:text-6xl"></i>
+                        </div>
+                        <div class="absolute top-2 right-2 sm:top-3 sm:right-3 md:top-4 md:right-4">
+                            <span class="bg-gold-500 text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-semibold">Desktop App</span>
+                        </div>
+                    </div>
+                    <div class="p-3 sm:p-4 md:p-6 lg:p-8">
+                        <h3 class="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-white mb-2 sm:mb-3 md:mb-4 group-hover:text-gold-400 transition-colors duration-300">
+                            PEW POS Management System
+                        </h3>
+                        <p class="text-white/70 mb-3 sm:mb-4 md:mb-6 leading-relaxed text-xs sm:text-sm md:text-base">
+                            Powerful Windows POS Software for Cafés, Retail Shops, and Small to Medium Businesses. Complete inventory management and sales processing solution.
+                        </p>
+                        <div class="flex flex-wrap gap-1 sm:gap-2 mb-3 sm:mb-4 md:mb-6">
+                            <span class="px-2 sm:px-3 py-1 bg-gold-500/20 text-gold-400 rounded-full text-xs font-medium">C#</span>
+                            <span class="px-2 sm:px-3 py-1 bg-gold-500/20 text-gold-400 rounded-full text-xs font-medium">Windows Forms</span>
+                            <span class="px-2 sm:px-3 py-1 bg-gold-500/20 text-gold-400 rounded-full text-xs font-medium">SQL Server</span>
+                            <span class="px-2 sm:px-3 py-1 bg-gold-500/20 text-gold-400 rounded-full text-xs font-medium">Crystal Reports</span>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-3 md:gap-0">
+                            <div class="text-white/60 text-xs sm:text-sm">
+                                <i class="fas fa-clock mr-2"></i>6 months (2024)
+                            </div>
+                            <div class="flex gap-1 sm:gap-2">
+                                <a href="https://drive.google.com/drive/folders/1IJxfqodaZ5MBYhrxa1xl8yYQotuc3oSn?usp=drive_link" class="bg-gold-gradient text-white px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 rounded-full font-semibold hover:scale-105 transition-transform duration-300 shadow-lg text-xs sm:text-sm flex-1 sm:flex-none text-center">
+                                    <i class="fas fa-download mr-1"></i>Download
+                                </a>
+                                <a href="project-details.html?id=pew-pos" class="glass text-white px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 rounded-full font-semibold hover:scale-105 transition-transform duration-300 border border-white/20 text-xs sm:text-sm flex-1 sm:flex-none text-center">
+                                    <i class="fas fa-info-circle mr-1"></i>Details
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="glass-dark rounded-2xl sm:rounded-3xl overflow-hidden hover-lift animate-slide-up group">
+                    <div class="relative overflow-hidden">
+                        <div class="w-full h-32 sm:h-40 md:h-48 bg-gradient-to-br from-accent-500 to-accent-700 flex items-center justify-center">
+                            <i class="fas fa-shopping-cart text-white text-2xl sm:text-4xl md:text-6xl"></i>
+                        </div>
+                        <div class="absolute top-2 right-2 sm:top-3 sm:right-3 md:top-4 md:right-4">
+                            <span class="bg-accent-500 text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-semibold">Web App</span>
+                        </div>
+                    </div>
+                    <div class="p-3 sm:p-4 md:p-6 lg:p-8">
+                        <h3 class="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-white mb-2 sm:mb-3 md:mb-4 group-hover:text-gold-400 transition-colors duration-300">
+                            E-commerce Website
+                        </h3>
+                        <p class="text-white/70 mb-3 sm:mb-4 md:mb-6 leading-relaxed text-xs sm:text-sm md:text-base">
+                            Developed a dynamic e-commerce website using WordPress, featuring product listings, secure payment integration, and a responsive design for seamless user experience.
+                        </p>
+                        <div class="flex flex-wrap gap-1 sm:gap-2 mb-3 sm:mb-4 md:mb-6">
+                            <span class="px-2 sm:px-3 py-1 bg-gold-500/20 text-gold-400 rounded-full text-xs font-medium">WordPress</span>
+                            <span class="px-2 sm:px-3 py-1 bg-gold-500/20 text-gold-400 rounded-full text-xs font-medium">PHP</span>
+                            <span class="px-2 sm:px-3 py-1 bg-gold-500/20 text-gold-400 rounded-full text-xs font-medium">WooCommerce</span>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-3 md:gap-0">
+                            <div class="text-white/60 text-xs sm:text-sm">
+                                <i class="fas fa-clock mr-2"></i>One week (Oct 2024)
+                            </div>
+                            <div class="flex gap-1 sm:gap-2">
+                                <a href="project-details.html?id=ecommerce" class="glass text-white px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 rounded-full font-semibold hover:scale-105 transition-transform duration-300 border border-white/20 text-xs sm:text-sm flex-1 sm:flex-none text-center">
+                                    <i class="fas fa-info-circle mr-1"></i>Details
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="glass-dark rounded-2xl sm:rounded-3xl overflow-hidden hover-lift animate-slide-in-right group">
+                    <div class="relative overflow-hidden">
+                        <div class="w-full h-32 sm:h-40 md:h-48 bg-gradient-to-br from-purple-500 to-purple-700 flex items-center justify-center">
+                            <i class="fas fa-hotel text-white text-2xl sm:text-4xl md:text-6xl"></i>
+                        </div>
+                        <div class="absolute top-2 right-2 sm:top-3 sm:right-3 md:top-4 md:right-4">
+                            <span class="bg-purple-500 text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-semibold">Desktop App</span>
+                        </div>
+                    </div>
+                    <div class="p-3 sm:p-4 md:p-6 lg:p-8">
+                        <h3 class="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-white mb-2 sm:mb-3 md:mb-4 group-hover:text-gold-400 transition-colors duration-300">
+                            Hotel Management System
+                        </h3>
+                        <p class="text-white/70 mb-3 sm:mb-4 md:mb-6 leading-relaxed text-xs sm:text-sm md:text-base">
+                            Designed and implemented a Hotel Management System using C# to manage room bookings, customer check-ins, check-outs, and staff assignments efficiently. Features include a user-friendly interface and real-time data updates.
+                        </p>
+                        <div class="flex flex-wrap gap-1 sm:gap-2 mb-3 sm:mb-4 md:mb-6">
+                            <span class="px-2 sm:px-3 py-1 bg-gold-500/20 text-gold-400 rounded-full text-xs font-medium">C#</span>
+                            <span class="px-2 sm:px-3 py-1 bg-gold-500/20 text-gold-400 rounded-full text-xs font-medium">Windows Forms</span>
+                            <span class="px-2 sm:px-3 py-1 bg-gold-500/20 text-gold-400 rounded-full text-xs font-medium">SQL Server</span>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-3 md:gap-0">
+                            <div class="text-white/60 text-xs sm:text-sm">
+                                <i class="fas fa-clock mr-2"></i>3 months (Sep 2024)
+                            </div>
+                            <div class="flex gap-1 sm:gap-2">
+                                <a href="project-details.html?id=hotel-management" class="glass text-white px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 rounded-full font-semibold hover:scale-105 transition-transform duration-300 border border-white/20 text-xs sm:text-sm flex-1 sm:flex-none text-center">
+                                    <i class="fas fa-info-circle mr-1"></i>Details
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 5 -->
+                <div class="glass-dark rounded-2xl sm:rounded-3xl overflow-hidden hover-lift animate-slide-up group">
+                    <div class="relative overflow-hidden">
+                        <div class="w-full h-32 sm:h-40 md:h-48 bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center">
+                            <i class="fas fa-mobile-alt text-white text-2xl sm:text-4xl md:text-6xl"></i>
+                        </div>
+                        <div class="absolute top-2 right-2 sm:top-3 sm:right-3 md:top-4 md:right-4">
+                            <span class="bg-blue-500 text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-semibold">Mobile</span>
+                        </div>
+                    </div>
+                    <div class="p-3 sm:p-4 md:p-6 lg:p-8">
+                        <h3 class="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-white mb-2 sm:mb-3 md:mb-4 group-hover:text-gold-400 transition-colors duration-300">
+                            Good Budget
+                        </h3>
+                        <p class="text-white/70 mb-3 sm:mb-4 md:mb-6 leading-relaxed text-xs sm:text-sm md:text-base">
+                            Good Budget is a user-friendly budgeting app designed to help you manage your finances efficiently. It allows you to track your income, plan spending, and monitor transactions with ease. Whether you're saving for a goal or managing daily expenses, Good Budget provides a clear overview of your financial health, empowering you to make smarter money decisions.
+                        </p>
+                        <div class="flex flex-wrap gap-1 sm:gap-2 mb-3 sm:mb-4 md:mb-6">
+                            <span class="px-2 sm:px-3 py-1 bg-gold-500/20 text-gold-400 rounded-full text-xs font-medium">Flutter</span>
+                            <span class="px-2 sm:px-3 py-1 bg-gold-500/20 text-gold-400 rounded-full text-xs font-medium">Dart</span>
+                            <span class="px-2 sm:px-3 py-1 bg-gold-500/20 text-gold-400 rounded-full text-xs font-medium">SQLite</span>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-3 md:gap-0">
+                            <div class="text-white/60 text-xs sm:text-sm">
+                                <i class="fas fa-clock mr-2"></i>1 month (2024)
+                            </div>
+                            <div class="flex gap-1 sm:gap-2">
+                                <a href="https://drive.google.com/drive/folders/1lPgtF9ID62us3riMc0sFjWWeLhWewrEP?usp=drive_link" class="bg-gold-gradient text-white px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 rounded-full font-semibold hover:scale-105 transition-transform duration-300 shadow-lg text-xs sm:text-sm flex-1 sm:flex-none text-center">
+                                    <i class="fas fa-download mr-1"></i>Download APK
+                                </a>
+                                <a href="project-details.html?id=good-budget" class="glass text-white px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 rounded-full font-semibold hover:scale-105 transition-transform duration-300 border border-white/20 text-xs sm:text-sm flex-1 sm:flex-none text-center">
+                                    <i class="fas fa-info-circle mr-1"></i>Details
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 6 -->
+                <div class="glass-dark rounded-2xl sm:rounded-3xl overflow-hidden hover-lift animate-slide-in-right group">
+                    <div class="relative overflow-hidden">
+                        <div class="w-full h-32 sm:h-40 md:h-48 bg-gradient-to-br from-orange-500 to-orange-700 flex items-center justify-center">
+                            <i class="fas fa-briefcase text-white text-2xl sm:text-4xl md:text-6xl"></i>
+                        </div>
+                        <div class="absolute top-2 right-2 sm:top-3 sm:right-3 md:top-4 md:right-4">
+                            <span class="bg-orange-500 text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-semibold">Web Blog</span>
+                        </div>
+                    </div>
+                    <div class="p-3 sm:p-4 md:p-6 lg:p-8">
+                        <h3 class="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-white mb-2 sm:mb-3 md:mb-4 group-hover:text-gold-400 transition-colors duration-300">
+                            Opportune
+                        </h3>
+                        <p class="text-white/70 mb-3 sm:mb-4 md:mb-6 leading-relaxed text-xs sm:text-sm md:text-base">
+                            Opportune helps you discover and keep track of global opportunities like scholarships, internships, and exchange programs. Never miss out on life-changing experiences by having all the details at your fingertips.
+                        </p>
+                        <div class="flex flex-wrap gap-1 sm:gap-2 mb-3 sm:mb-4 md:mb-6">
+                            <span class="px-2 sm:px-3 py-1 bg-gold-500/20 text-gold-400 rounded-full text-xs font-medium">Blogger</span>
+                            <span class="px-2 sm:px-3 py-1 bg-gold-500/20 text-gold-400 rounded-full text-xs font-medium">HTML</span>
+                            <span class="px-2 sm:px-3 py-1 bg-gold-500/20 text-gold-400 rounded-full text-xs font-medium">CSS</span>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-3 md:gap-0">
+                            <div class="text-white/60 text-xs sm:text-sm">
+                                <i class="fas fa-clock mr-2"></i>1 months (2024)
+                            </div>
+                            <div class="flex gap-1 sm:gap-2">
+                                <a href="https://opportune2025.blogspot.com" class="bg-gold-gradient text-white px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 rounded-full font-semibold hover:scale-105 transition-transform duration-300 shadow-lg text-xs sm:text-sm flex-1 sm:flex-none text-center">
+                                    <i class="fas fa-external-link-alt mr-1"></i>Visit Blog
+                                </a>
+                                <a href="project-details.html?id=opportune" class="glass text-white px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 rounded-full font-semibold hover:scale-105 transition-transform duration-300 border border-white/20 text-xs sm:text-sm flex-1 sm:flex-none text-center">
+                                    <i class="fas fa-info-circle mr-1"></i>Details
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 7 - MadeInScanner -->
+                <div class="glass-dark rounded-2xl sm:rounded-3xl overflow-hidden hover-lift animate-slide-in-left group">
+                    <div class="relative overflow-hidden">
+                        <div class="w-full h-32 sm:h-40 md:h-48 bg-gradient-to-br from-indigo-500 to-indigo-700 flex items-center justify-center">
+                            <i class="fas fa-qrcode text-white text-2xl sm:text-4xl md:text-6xl"></i>
+                        </div>
+                        <div class="absolute top-2 right-2 sm:top-3 sm:right-3 md:top-4 md:right-4">
+                            <span class="bg-indigo-500 text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-semibold">Mobile App</span>
+                        </div>
+                    </div>
+                    <div class="p-3 sm:p-4 md:p-6 lg:p-8">
+                        <h3 class="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-white mb-2 sm:mb-3 md:mb-4 group-hover:text-gold-400 transition-colors duration-300">
+                            MadeInScanner
+                        </h3>
+                        <p class="text-white/70 mb-3 sm:mb-4 md:mb-6 leading-relaxed text-xs sm:text-sm md:text-base">
+                            MadeInScanner is your quick and easy tool to identify a product's country of origin. Just scan the barcode, and the app instantly detects where it was made. Keep track of your scans with a built-in history, and make smarter choices when shopping.
+                        </p>
+                        <div class="flex flex-wrap gap-1 sm:gap-2 mb-3 sm:mb-4 md:mb-6">
+                            <span class="px-2 sm:px-3 py-1 bg-gold-500/20 text-gold-400 rounded-full text-xs font-medium">Flutter</span>
+                            <span class="px-2 sm:px-3 py-1 bg-gold-500/20 text-gold-400 rounded-full text-xs font-medium">Dart</span>
+                            <span class="px-2 sm:px-3 py-1 bg-gold-500/20 text-gold-400 rounded-full text-xs font-medium">Barcode Scanner</span>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-3 md:gap-0">
+                            <div class="text-white/60 text-xs sm:text-sm">
+                                <i class="fas fa-clock mr-2"></i>2 months (2024)
+                            </div>
+                            <div class="flex gap-1 sm:gap-2">
+                                <a href="https://drive.google.com/drive/folders/1V6YtDH0qbaqIS_AZjTPUkO9hwm0piRAp?usp=sharing" class="bg-gold-gradient text-white px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 rounded-full font-semibold hover:scale-105 transition-transform duration-300 shadow-lg text-xs sm:text-sm flex-1 sm:flex-none text-center">
+                                    <i class="fas fa-download mr-1"></i>Download
+                                </a>
+                                <a href="project-details.html?id=madein-scanner" class="glass text-white px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 rounded-full font-semibold hover:scale-105 transition-transform duration-300 border border-white/20 text-xs sm:text-sm flex-1 sm:flex-none text-center">
+                                    <i class="fas fa-info-circle mr-1"></i>Details
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 8 - Cambodia Destinations -->
+                <div class="glass-dark rounded-2xl sm:rounded-3xl overflow-hidden hover-lift animate-slide-up group">
+                    <div class="relative overflow-hidden">
+                        <div class="w-full h-32 sm:h-40 md:h-48 bg-gradient-to-br from-emerald-500 to-emerald-700 flex items-center justify-center">
+                            <i class="fas fa-map-marked-alt text-white text-2xl sm:text-4xl md:text-6xl"></i>
+                        </div>
+                        <div class="absolute top-2 right-2 sm:top-3 sm:right-3 md:top-4 md:right-4">
+                            <span class="bg-emerald-500 text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-semibold">Repository</span>
+                        </div>
+                    </div>
+                    <div class="p-3 sm:p-4 md:p-6 lg:p-8">
+                        <h3 class="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-white mb-2 sm:mb-3 md:mb-4 group-hover:text-gold-400 transition-colors duration-300">
+                            Cambodia Destinations
+                        </h3>
+                        <p class="text-white/70 mb-3 sm:mb-4 md:mb-6 leading-relaxed text-xs sm:text-sm md:text-base">
+                            Laravel 12 tourism CMS + public site for exploring Cambodia’s destinations, galleries, travel tips, and more. Includes admin panel, newsletter, contact inquiries, backups, and Gemini-powered AI assistant.
+                        </p>
+                        <div class="flex flex-wrap gap-1 sm:gap-2 mb-3 sm:mb-4 md:mb-6">
+                            <span class="px-2 sm:px-3 py-1 bg-gold-500/20 text-gold-400 rounded-full text-xs font-medium">Laravel 12</span>
+                            <span class="px-2 sm:px-3 py-1 bg-gold-500/20 text-gold-400 rounded-full text-xs font-medium">PHP 8.2</span>
+                            <span class="px-2 sm:px-3 py-1 bg-gold-500/20 text-gold-400 rounded-full text-xs font-medium">Tailwind CSS</span>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-3 md:gap-0">
+                            <div class="text-white/60 text-xs sm:text-sm">
+                                <i class="fas fa-clock mr-2"></i>3 months (2025)
+                            </div>
+                            <div class="flex gap-1 sm:gap-2">
+                                <a href="https://github.com/seavpeavpech24-bot/cambodia-destinations" class="bg-gold-gradient text-white px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 rounded-full font-semibold hover:scale-105 transition-transform duration-300 shadow-lg text-xs sm:text-sm flex-1 sm:flex-none text-center">
+                                    <i class="fab fa-github mr-1"></i>Repository
+                                </a>
+                                <a href="project-details.html?id=cambodia-destinations" class="glass text-white px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 rounded-full font-semibold hover:scale-105 transition-transform duration-300 border border-white/20 text-xs sm:text-sm flex-1 sm:flex-none text-center">
+                                    <i class="fas fa-info-circle mr-1"></i>Details
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 9 - Realtime Chat (Laravel + Vue) -->
+                <div class="glass-dark rounded-2xl sm:rounded-3xl overflow-hidden hover-lift animate-slide-in-right group">
+                    <div class="relative overflow-hidden">
+                        <div class="w-full h-32 sm:h-40 md:h-48 bg-gradient-to-br from-sky-500 to-sky-700 flex items-center justify-center">
+                            <i class="fas fa-comments text-white text-2xl sm:text-4xl md:text-6xl"></i>
+                        </div>
+                        <div class="absolute top-2 right-2 sm:top-3 sm:right-3 md:top-4 md:right-4">
+                            <span class="bg-sky-500 text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-semibold">Repository</span>
+                        </div>
+                    </div>
+                    <div class="p-3 sm:p-4 md:p-6 lg:p-8">
+                        <h3 class="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-white mb-2 sm:mb-3 md:mb-4 group-hover:text-gold-400 transition-colors duration-300">
+                            Realtime Chat (Laravel + Vue)
+                        </h3>
+                        <p class="text-white/70 mb-3 sm:mb-4 md:mb-6 leading-relaxed text-xs sm:text-sm md:text-base">
+                            Real-time chat with Laravel backend and Vue 3 frontend using Pusher. Includes auth, private chats, typing indicators, user presence, and message history.
+                        </p>
+                        <div class="flex flex-wrap gap-1 sm:gap-2 mb-3 sm:mb-4 md:mb-6">
+                            <span class="px-2 sm:px-3 py-1 bg-gold-500/20 text-gold-400 rounded-full text-xs font-medium">Laravel 11+</span>
+                            <span class="px-2 sm:px-3 py-1 bg-gold-500/20 text-gold-400 rounded-full text-xs font-medium">Vue 3</span>
+                            <span class="px-2 sm:px-3 py-1 bg-gold-500/20 text-gold-400 rounded-full text-xs font-medium">Pusher</span>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-3 md:gap-0">
+                            <div class="text-white/60 text-xs sm:text-sm">
+                                <i class="fas fa-clock mr-2"></i>2 hours (30 Sep 2025)
+                            </div>
+                            <div class="flex gap-1 sm:gap-2">
+                                <a href="https://github.com/seavpeavpech24-bot/realtime-chat-laravel-vue" class="bg-gold-gradient text-white px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 rounded-full font-semibold hover:scale-105 transition-transform duration-300 shadow-lg text-xs sm:text-sm flex-1 sm:flex-none text-center">
+                                    <i class="fab fa-github mr-1"></i>Repository
+                                </a>
+                                <a href="project-details.html?id=realtime-chat-laravel-vue" class="glass text-white px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 rounded-full font-semibold hover:scale-105 transition-transform duration-300 border border-white/20 text-xs sm:text-sm flex-1 sm:flex-none text-center">
+                                    <i class="fas fa-info-circle mr-1"></i>Details
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+<section id="certifications" class="py-16 sm:py-24 md:py-32 relative overflow-hidden">
+    <!-- Background -->
+    <div class="absolute inset-0 bg-gradient-to-br from-luxury-50 via-white to-platinum-50"></div>
+    <div class="absolute top-4 right-4 w-32 h-32 sm:top-20 sm:right-20 sm:w-96 sm:h-96 bg-gold-100/30 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-4 left-4 w-24 h-24 sm:bottom-20 sm:left-20 sm:w-80 sm:h-80 bg-accent-100/30 rounded-full blur-3xl"></div>
+    
+    <div class="container mx-auto px-4 sm:px-6 relative z-10">
+        <div class="text-center mb-12 sm:mb-16 md:mb-20">
+            <h2 class="text-4xl sm:text-5xl md:text-6xl font-display font-bold mb-4 sm:mb-6 text-luxury-900">
+                <span class="gradient-text">Certifications</span>
+            </h2>
+            <div class="w-16 sm:w-24 h-1 bg-gold-gradient mx-auto rounded-full"></div>
+        </div>
+        
+        <div class="max-w-4xl sm:max-w-5xl mx-auto space-y-6 sm:space-y-8">
+            <!-- Certification 1 -->
+            <div class="glass rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 hover-lift animate-slide-in-left">
+                <div class="flex items-start flex-col sm:flex-row">
+                    <div class="w-12 h-12 sm:w-16 sm:h-16 bg-gold-gradient rounded-xl sm:rounded-2xl flex items-center justify-center mr-0 sm:mr-4 mb-3 sm:mb-0 flex-shrink-0">
+                        <i class="fas fa-certificate text-white text-lg sm:text-2xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-xl sm:text-2xl font-bold text-luxury-900 mb-1 sm:mb-2">NYP-ROK ASEAN TVET Mobility Program</h3>
+                        <p class="text-gold-600 font-semibold mb-2 sm:mb-3 text-sm sm:text-base">IT Applications & Development</p>
+                        <p class="text-luxury-700 leading-relaxed mb-3 sm:mb-4 text-sm sm:text-base">
+                            Advanced training program at Nanyang Polytechnic, Singapore focusing on cutting-edge IT applications and development methodologies. Gained international exposure and hands-on experience with modern technologies.
+                        </p>
+                        <div class="flex flex-wrap items-center text-luxury-600 text-sm sm:text-base">
+                            <div class="flex items-center mr-4 mb-2 sm:mb-0">
+                                <i class="fas fa-map-marker-alt mr-2"></i>
+                                <span>Nanyang Polytechnic, Singapore</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-calendar mr-2"></i>
+                                <span>Oct–Nov 2024</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Certification 2 -->
+            <div class="glass rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 hover-lift animate-slide-in-right">
+                <div class="flex items-start flex-col sm:flex-row">
+                    <div class="w-12 h-12 sm:w-16 sm:h-16 bg-gold-gradient rounded-xl sm:rounded-2xl flex items-center justify-center mr-0 sm:mr-4 mb-3 sm:mb-0 flex-shrink-0">
+                        <i class="fas fa-globe text-white text-lg sm:text-2xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-xl sm:text-2xl font-bold text-luxury-900 mb-1 sm:mb-2">Eurasia Foundation Program Grant</h3>
+                        <p class="text-gold-600 font-semibold mb-2 sm:mb-3 text-sm sm:text-base">Study for Peaceful Asian Communities</p>
+                        <p class="text-luxury-700 leading-relaxed mb-3 sm:mb-4 text-sm sm:text-base">
+                            Comprehensive program focused on building peaceful communities across Asia through education and cultural exchange. Developed leadership skills and cross-cultural understanding.
+                        </p>
+                        <div class="flex flex-wrap items-center text-luxury-600 text-sm sm:text-base">
+                            <div class="flex items-center mr-4 mb-2 sm:mb-0">
+                                <i class="fas fa-map-marker-alt mr-2"></i>
+                                <span>Kampong Thom Polytechnic</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-calendar mr-2"></i>
+                                <span>Nov 2022 – Feb 2023</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Certification 3 -->
+            <div class="glass rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 hover-lift animate-slide-in-left">
+                <div class="flex items-start flex-col sm:flex-row">
+                    <div class="w-12 h-12 sm:w-16 sm:h-16 bg-gold-gradient rounded-xl sm:rounded-2xl flex items-center justify-center mr-0 sm:mr-4 mb-3 sm:mb-0 flex-shrink-0">
+                        <i class="fas fa-leaf text-white text-lg sm:text-2xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-xl sm:text-2xl font-bold text-luxury-900 mb-1 sm:mb-2">Environmental Education & Training</h3>
+                        <p class="text-gold-600 font-semibold mb-2 sm:mb-3 text-sm sm:text-base">Compass & Map Training</p>
+                        <p class="text-luxury-700 leading-relaxed mb-3 sm:mb-4 text-sm sm:text-base">
+                            Specialized training in environmental conservation and navigation skills. Gained practical knowledge in sustainable practices and outdoor leadership.
+                        </p>
+                        <div class="flex items-center text-luxury-600 text-sm sm:text-base">
+                            <i class="fas fa-calendar mr-2"></i>
+                            <span>2022</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Certification 4 -->
+            <div class="glass rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 hover-lift animate-slide-in-right">
+                <div class="flex items-start flex-col sm:flex-row">
+                    <div class="w-12 h-12 sm:w-16 sm:h-16 bg-gold-gradient rounded-xl sm:rounded-2xl flex items-center justify-center mr-0 sm:mr-4 mb-3 sm:mb-0 flex-shrink-0">
+                        <i class="fas fa-users text-white text-lg sm:text-2xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-xl sm:text-2xl font-bold text-luxury-900 mb-1 sm:mb-2">Eurasia Foundation Program Grant</h3>
+                        <p class="text-gold-600 font-semibold mb-2 sm:mb-3 text-sm sm:text-base">Youth's Capacity Building for Sustainable Community Development</p>
+                        <p class="text-luxury-700 leading-relaxed mb-3 sm:mb-4 text-sm sm:text-base">
+                            Leadership development program focused on empowering youth to drive sustainable community development initiatives. Enhanced project management and community engagement skills.
+                        </p>
+                        <div class="flex items-center text-luxury-600 text-sm sm:text-base">
+                            <i class="fas fa-calendar mr-2"></i>
+                            <span>Aug – Nov 2021</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Certification 5 -->
+            <div class="glass rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 hover-lift animate-slide-in-left">
+                <div class="flex items-start flex-col sm:flex-row">
+                    <div class="w-12 h-12 sm:w-16 sm:h-16 bg-gold-gradient rounded-xl sm:rounded-2xl flex items-center justify-center mr-0 sm:mr-4 mb-3 sm:mb-0 flex-shrink-0">
+                        <i class="fas fa-laptop text-white text-lg sm:text-2xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-xl sm:text-2xl font-bold text-luxury-900 mb-1 sm:mb-2">Online Seminar</h3>
+                        <p class="text-gold-600 font-semibold mb-2 sm:mb-3 text-sm sm:text-base">Peace and Cooperation, Development, Education and Training of Human Resources</p>
+                        <p class="text-luxury-700 leading-relaxed mb-3 sm:mb-4 text-sm sm:text-base">
+                            Virtual learning experience focusing on peace-building, cooperation strategies, and human resource development in educational contexts.
+                        </p>
+                        <div class="flex items-center text-luxury-600 text-sm sm:text-base">
+                            <i class="fas fa-calendar mr-2"></i>
+                            <span>Oct 2021</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Footer -->
+    <footer id="contact" class="py-20 luxury-gradient text-white relative overflow-hidden">
+        <!-- Background decoration -->
+        <div class="absolute inset-0">
+            <div class="absolute top-10 left-10 w-96 h-96 bg-gold-500/10 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-10 right-10 w-80 h-80 bg-accent-500/10 rounded-full blur-3xl"></div>
+        </div>
+        
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <h2 class="text-5xl md:text-6xl font-display font-bold mb-8">
+                Get In <span class="gradient-text">Touch</span>
+            </h2>
+            <p class="text-2xl font-semibold mb-4 text-white/90">SEAVPEAV PECH</p>
+            <p class="text-xl text-white/70 mb-12 max-w-2xl mx-auto">
+                Ready to bring your ideas to life? Let's collaborate and create something amazing together.
+            </p>
+            
+            <!-- Contact buttons -->
+            <div class="flex flex-col sm:flex-row gap-6 justify-center mb-12">
+                <a href="mailto:seavpeavpech24@gmail.com" class="px-8 py-4 bg-gold-gradient text-white font-semibold rounded-full hover-lift shadow-2xl transition-all duration-300 hover:shadow-gold-500/25">
+                    <i class="fas fa-envelope mr-3"></i>
+                    Send Email
+                </a>
+                <!-- <a href="tel:+85512345678" class="px-8 py-4 glass text-white font-semibold rounded-full hover-lift border border-white/20 transition-all duration-300">
+                    <i class="fas fa-phone mr-3"></i>
+                    Call Now
+                </a> -->
+            </div>
+            
+            <!-- Social links -->
+            <div class="flex justify-center space-x-8 mb-12">
+                <a href="mailto:seavpeavpech24@gmail.com" class="w-16 h-16 bg-gold-gradient rounded-full flex items-center justify-center hover-lift transition-all duration-300 hover:scale-110">
+                    <i class="fas fa-envelope text-white text-2xl"></i>
+                </a>
+                <!-- <a href="tel:+85512345678" class="w-16 h-16 glass rounded-full flex items-center justify-center hover-lift transition-all duration-300 hover:scale-110 border border-white/20">
+                    <i class="fas fa-phone text-white text-2xl"></i>
+                </a> -->
+                <a href="https://www.linkedin.com/in/seavpeav-pech-557556254/" class="w-16 h-16 glass rounded-full flex items-center justify-center hover-lift transition-all duration-300 hover:scale-110 border border-white/20">
+                    <i class="fab fa-linkedin text-white text-2xl"></i>
+                </a>
+                <a href="https://github.com/seavpeavpech24-bot" class="w-16 h-16 glass rounded-full flex items-center justify-center hover-lift transition-all duration-300 hover:scale-110 border border-white/20">
+                    <i class="fab fa-github text-white text-2xl"></i>
+                </a>
+            </div>
+            
+            <!-- Copyright -->
+            <div class="border-t border-white/20 pt-8">
+                <p class="text-white/60 text-lg">
+                    &copy; 2025 SEAVPEAV PECH. All rights reserved. Crafted with passion and precision.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Enhanced intersection observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    
+                    // Add staggered animation for child elements
+                    const animatedElements = entry.target.querySelectorAll('.animate-slide-in-left, .animate-slide-in-right, .animate-slide-up');
+                    animatedElements.forEach((el, index) => {
+                        setTimeout(() => {
+                            el.classList.add('opacity-100', 'translate-x-0', 'translate-y-0');
+                        }, index * 200);
+                    });
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections except hero (which is already visible)
+        document.querySelectorAll('section:not(#home)').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            // Close mobile menu when clicking on a link
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+        }
+
+        // Smooth scrolling for nav links with offset for fixed header
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const headerOffset = 80;
+                    const elementPosition = target.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to navigation
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.classList.add('shadow-2xl');
+                nav.classList.remove('shadow-lg');
+            } else {
+                nav.classList.add('shadow-lg');
+                nav.classList.remove('shadow-2xl');
+            }
+        });
+
+        // Add typing effect to hero text
+        function typeWriter(element, text, speed = 100) {
+            let i = 0;
+            element.innerHTML = '';
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
+
+        // Initialize animations on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add loading animation
+            const heroContent = document.querySelector('#home .container');
+            if (heroContent) {
+                heroContent.style.opacity = '0';
+                heroContent.style.transform = 'translateY(30px)';
+                
+                setTimeout(() => {
+                    heroContent.style.transition = 'all 1s ease-out';
+                    heroContent.style.opacity = '1';
+                    heroContent.style.transform = 'translateY(0)';
+                }, 300);
+            }
+
+            // Add hover effects to project cards
+            const projectCards = document.querySelectorAll('#projects .glass-dark');
+            projectCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+        });
+
+        // Add parallax effect to background elements
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.parallax');
+            
+            parallaxElements.forEach(element => {
+                const speed = 0.5;
+                element.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,261 @@
+{
+  "projects": [
+    {
+      "id": "pew-pos",
+      "title": "PEW POS Management System",
+      "subtitle": "Powerful Windows POS Software for Cafés, Retail Shops, and Small to Medium Businesses",
+      "description": "PEW POS is an all-in-one Point of Sale (POS) management system designed for Windows (supports Windows 7 to 11). It helps businesses streamline sales, manage inventory, and generate reports with ease. Whether you run a café, retail shop, or small business, PEW POS makes managing operations fast, simple, and reliable.",
+      "type": "Desktop App",
+      "duration": "6 months (2024)",
+      "technologies": ["C#", "Windows Forms", "SQLite"],
+      "features": [
+        "Product, stock, and category management",
+        "Sales processing with bill printing (80 x 80 mm)",
+        "Daily and shift-based reports",
+        "Employee and department management",
+        "Sales analysis and comparison tools",
+        "User and role management",
+        "Backup and restore functionality",
+        "Tax configuration and shift-closing reports"
+      ],
+      "pricing": {
+        "trial": "FREE for 1 month",
+        "license": "$19 lifetime license"
+      },
+      "contact": "seavpeavpech24@gmail.com",
+      "downloadUrl": "https://drive.google.com/file/d/1LdCcIOIXcFAzP4Dkm3p15W9JgnL3SgpF/view?usp=drive_link",
+      "githubUrl": "#",
+      "image": "https://via.placeholder.com/600x400/001F3F/FFFFFF?text=PEW+POS+System",
+      "icon": "fas fa-cash-register",
+      "color": "from-gold-500 to-gold-700",
+      "gallery": [
+        {
+          "url": "assets/images/11.jpg",
+          "alt": "PEW POS Dashboard"
+        },
+        {
+          "url": "assets/images/22.jpg",
+          "alt": "PEW POS Sales Interface"
+        },
+        {
+          "url": "assets/images/33.jpg",
+          "alt": "PEW POS Inventory Management"
+        },
+        {
+          "url": "assets/images/44.jpg",
+          "alt": "PEW POS Reports"
+        }
+      ]
+    },
+    {
+      "id": "ecommerce",
+      "title": "E-commerce Website",
+      "subtitle": "WordPress E-commerce Platform",
+      "description": "Developed a dynamic e-commerce website using WordPress, featuring product listings, secure payment integration, and a responsive design for seamless user experience.",
+      "type": "Web App",
+      "duration": "One week (December 2024)",
+      "technologies": ["WordPress", "PHP", "MySQL", "WooCommerce"],
+      "features": [
+        "WordPress-based e-commerce platform",
+        "Product listings and catalog",
+        "Secure payment integration",
+        "Responsive design for all devices",
+        "User-friendly interface",
+        "International collaboration project",
+        "Cross-cultural team development",
+        "Singapore exchange program project"
+      ],
+      "githubUrl": "#",
+      "liveUrl": "#",
+      "image": "https://via.placeholder.com/600x400/001F3F/FFFFFF?text=E-commerce+Website",
+      "icon": "fas fa-shopping-cart",
+      "color": "from-accent-500 to-accent-700",
+      "team": "5 members",
+      "location": "Singapore (Exchange Program)",
+      "gallery": [
+        {
+          "url": "assets/images/world_press_project.png",
+          "alt": "E-commerce Homepage"
+        }
+      ]
+    },
+    {
+      "id": "hotel-management",
+      "title": "Hotel Management System",
+      "subtitle": "C# Desktop Application",
+      "description": "Designed and implemented a Hotel Management System using C# to manage room bookings, customer check-ins, check-outs, and staff assignments efficiently. Features include a user-friendly interface and real-time data updates.",
+      "type": "Desktop App",
+      "duration": "3 months (September 2024)",
+      "technologies": ["C#", "Windows Forms", "SQL Server"],
+      "features": [
+        "Room booking and reservation management",
+        "Customer check-in/check-out system",
+        "Staff assignment and management",
+        "Real-time data updates",
+        "User-friendly interface",
+        "Database management",
+        "Reporting system",
+        "Currently in development"
+      ],
+      "githubUrl": "#",
+      "liveUrl": "#",
+      "image": "https://via.placeholder.com/600x400/001F3F/FFFFFF?text=Hotel+Management",
+      "icon": "fas fa-hotel",
+      "color": "from-purple-500 to-purple-700",
+      "team": "1 member",
+      "status": "In Development",
+      "releaseDate": "Not released yet",
+      "gallery": [
+        {
+          "url": "assets/images/world_press_project.png",
+          "alt": "E-commerce Homepage"
+        }
+      ]
+    },
+    {
+      "id": "cafe-pos",
+      "title": "Cafe POS Management System",
+      "subtitle": "Point-of-Sale Solution for Cafes",
+      "description": "Point-of-sale solution tailored for cafes, including order tracking and sales reporting with inventory management.",
+      "type": "Desktop App",
+      "duration": "2 months (2023)",
+      "technologies": ["C#", "SQL Server", "WPF", "Entity Framework"],
+      "features": [
+        "Menu and item management",
+        "Order processing and tracking",
+        "Inventory management",
+        "Sales reporting and analytics",
+        "Staff management",
+        "Table management",
+        "Receipt printing",
+        "Daily sales summaries"
+      ],
+      "githubUrl": "#",
+      "downloadUrl": "#",
+      "image": "https://via.placeholder.com/600x400/001F3F/FFFFFF?text=Cafe+POS",
+      "icon": "fas fa-coffee",
+      "color": "from-green-500 to-green-700"
+    },
+    {
+      "id": "good-budget",
+      "title": "Good Budget",
+      "subtitle": "Android Budgeting App",
+      "description": "Good Budget is a user-friendly budgeting app designed to help you manage your finances efficiently. It allows you to track your income, plan spending, and monitor transactions with ease. Whether you're saving for a goal or managing daily expenses, Good Budget provides a clear overview of your financial health, empowering you to make smarter money decisions.",
+      "type": "Mobile App",
+      "duration": "1 month (2024)",
+      "technologies": ["Flutter", "Dart", "SQLite", "Provider"],
+      "features": [
+        "Income tracking and management",
+        "Expense planning and monitoring",
+        "Transaction history and analysis",
+        "Financial health overview",
+        "Goal setting and tracking",
+        "Smart money decisions support",
+        "User-friendly interface",
+        "APK available for download"
+      ],
+      "githubUrl": "#",
+      "downloadUrl": "https://drive.google.com/file/d/your-file-id/view",
+      "image": "https://via.placeholder.com/600x400/001F3F/FFFFFF?text=Good+Budget",
+      "icon": "fas fa-mobile-alt",
+      "color": "from-blue-500 to-blue-700",
+      "platform": "Android",
+      "availability": "APK available on Google Drive"
+    },
+    {
+      "id": "opportune",
+      "title": "Opportune",
+      "subtitle": "Global Opportunities Blog",
+      "description": "Opportune helps you discover and keep track of global opportunities like scholarships, internships, and exchange programs. Never miss out on life-changing experiences by having all the details at your fingertips.",
+      "type": "Web Blog",
+      "duration": "3 months (2024)",
+      "technologies": ["Blogger", "HTML", "CSS", "JavaScript"],
+      "features": [
+        "Global opportunities discovery",
+        "Scholarship tracking and updates",
+        "Internship program listings",
+        "Exchange program information",
+        "Life-changing experiences guide",
+        "Regular updates and notifications",
+        "User-friendly blog interface",
+        "Mobile-responsive design"
+      ],
+      "githubUrl": "#",
+      "liveUrl": "https://opportune-blog.blogspot.com",
+      "image": "https://via.placeholder.com/600x400/001F3F/FFFFFF?text=Opportune",
+      "icon": "fas fa-briefcase",
+      "color": "from-orange-500 to-orange-700",
+      "platform": "Blogger",
+      "contentType": "Blog"
+    },
+    {
+      "id": "madein-scanner",
+      "title": "MadeInScanner",
+      "subtitle": "Product Origin Scanner App",
+      "description": "MadeInScanner is your quick and easy tool to identify a product's country of origin. Just scan the barcode, and the app instantly detects where it was made. Keep track of your scans with a built-in history, and make smarter choices when shopping. Perfect for anyone who wants to know more about the products they buy.",
+      "type": "Mobile App",
+      "duration": "2 months (2024)",
+      "technologies": ["Flutter", "Dart", "Barcode Scanner", "SQLite"],
+      "features": [
+        "Barcode scanning functionality",
+        "Product origin identification",
+        "Country of origin detection",
+        "Scan history tracking",
+        "Smart shopping decisions",
+        "Product information database",
+        "User-friendly interface",
+        "Offline scanning capability"
+      ],
+      "githubUrl": "#",
+      "downloadUrl": "#",
+      "image": "https://via.placeholder.com/600x400/001F3F/FFFFFF?text=MadeInScanner",
+      "icon": "fas fa-qrcode",
+      "color": "from-indigo-500 to-indigo-700",
+      "platform": "Mobile",
+      "category": "Utility"
+    }
+    ,
+    {
+      "id": "cambodia-destinations",
+      "title": "Cambodia Destinations",
+      "subtitle": "Laravel 12 Tourism CMS + Public Site",
+      "description": "A Laravel 12 tourism CMS and public site for exploring Cambodia’s destinations, galleries, travel tips, and more. Includes an admin panel, newsletter, contact inquiries, backups, and an AI assistant powered by Gemini.",
+      "type": "Repository",
+      "duration": "Ongoing (2025)",
+      "technologies": ["Laravel 12", "PHP 8.2+", "Composer 2+", "Node 18+", "SQLite/MySQL", "Tailwind CSS", "Gemini API", "OpenWeather"],
+      "features": [
+        "Destinations CMS with categories and galleries",
+        "Admin panel with users, backups, and content management",
+        "AI assistant (Gemini) for destination queries",
+        "Weather widget via OpenWeather",
+        "Newsletter subscriptions and contact inquiries",
+        "SEO-friendly Blade views",
+        "Leaflet interactive map with grouped layers"
+      ],
+      "githubUrl": "https://github.com/seavpeavpech24-bot/cambodia-destinations",
+      "image": "https://via.placeholder.com/600x400/001F3F/FFFFFF?text=Cambodia+Destinations",
+      "icon": "fas fa-map-marked-alt",
+      "color": "from-emerald-500 to-emerald-700"
+    },
+    {
+      "id": "realtime-chat-laravel-vue",
+      "title": "Realtime Chat (Laravel + Vue)",
+      "subtitle": "Pusher-powered Real-time Chat Application",
+      "description": "A real-time chat application built with Laravel (backend) and Vue 3 (frontend) using Pusher for real-time features, with auth, private chats, typing indicators, and message history.",
+      "type": "Repository",
+      "duration": "2025",
+      "technologies": ["Laravel 11+", "Sanctum", "MySQL/SQLite", "Pusher", "Vue 3", "Pinia", "Vue Router", "Axios", "Tailwind CSS", "Laravel Echo"],
+      "features": [
+        "User registration and authentication",
+        "Real-time messaging with Pusher",
+        "User online status and typing indicators",
+        "Private conversations and message history",
+        "Responsive UI with Tailwind CSS"
+      ],
+      "githubUrl": "https://github.com/seavpeavpech24-bot/realtime-chat-laravel-vue",
+      "image": "https://via.placeholder.com/600x400/001F3F/FFFFFF?text=Realtime+Chat",
+      "icon": "fas fa-comments",
+      "color": "from-sky-500 to-sky-700"
+    }
+  ]
+}

@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Details - SEAVPEAV PECH</title>
+    <link rel="icon" href="favicon.png" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        luxury: {
+                            50: '#fafafa',
+                            100: '#f5f5f5',
+                            200: '#e5e5e5',
+                            300: '#d4d4d4',
+                            400: '#a3a3a3',
+                            500: '#737373',
+                            600: '#525252',
+                            700: '#404040',
+                            800: '#262626',
+                            900: '#171717',
+                            950: '#0a0a0a',
+                        },
+                        gold: {
+                            50: '#fffbeb',
+                            100: '#fef3c7',
+                            200: '#fde68a',
+                            300: '#fcd34d',
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                            700: '#b45309',
+                            800: '#92400e',
+                            900: '#78350f',
+                        },
+                        platinum: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            200: '#e2e8f0',
+                            300: '#cbd5e1',
+                            400: '#94a3b8',
+                            500: '#64748b',
+                            600: '#475569',
+                            700: '#334155',
+                            800: '#1e293b',
+                            900: '#0f172a',
+                        },
+                        accent: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        }
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                        'display': ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .glass-dark {
+            background: rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #f59e0b, #d97706, #b45309);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .luxury-gradient {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+        }
+        .gold-gradient {
+            background: linear-gradient(135deg, #f59e0b, #d97706, #b45309);
+        }
+        .hover-lift {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .hover-lift:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            max-width: 90vw;
+            max-height: 90vh;
+            position: relative;
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+        }
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-luxury-50 via-platinum-50 to-luxury-100 text-luxury-900 font-sans antialiased">
+    <!-- Navigation Bar -->
+    <nav class="fixed top-0 w-full glass shadow-2xl z-50 transition-all duration-500 hover:shadow-3xl">
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="flex justify-between items-center py-4 sm:py-6">
+                <a href="index.html" class="text-xl sm:text-2xl md:text-3xl font-display font-bold gradient-text tracking-wide">SEAVPEAV PECH</a>
+                <div class="flex items-center gap-4">
+                    <button onclick="forceRefresh()" class="text-luxury-800 hover:text-gold-600 transition-colors duration-300 font-semibold text-sm sm:text-base" title="Refresh Data (Ctrl+R)">
+                        <i class="fas fa-sync-alt mr-2"></i>Refresh
+                    </button>
+                    <a href="index.html" class="text-luxury-800 hover:text-gold-600 transition-colors duration-300 font-semibold text-sm sm:text-base">
+                        <i class="fas fa-arrow-left mr-2"></i>Back to Portfolio
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Project Details Section -->
+    <section class="pt-24 sm:pt-28 md:pt-32 pb-16 sm:pb-20">
+        <div class="container mx-auto px-4 sm:px-6">
+            <!-- Loading State -->
+            <div id="loading" class="text-center py-16 sm:py-20">
+                <div class="animate-spin rounded-full h-24 w-24 sm:h-32 sm:w-32 border-b-2 border-gold-500 mx-auto"></div>
+                <p class="text-luxury-600 mt-4 text-sm sm:text-base">Loading project details...</p>
+            </div>
+
+            <!-- Project Content -->
+            <div id="project-content" class="hidden">
+                <!-- Project Header -->
+                <div class="glass rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 mb-8 sm:mb-12 hover-lift">
+                    <div class="flex flex-col lg:flex-row gap-6 sm:gap-8 items-center">
+                        <div class="w-full lg:w-1/3">
+                            <div id="project-image" class="w-full h-48 sm:h-56 md:h-64 rounded-xl sm:rounded-2xl bg-gradient-to-br flex items-center justify-center">
+                                <i id="project-icon" class="text-white text-4xl sm:text-5xl md:text-6xl"></i>
+                            </div>
+                        </div>
+                        <div class="w-full lg:w-2/3">
+                            <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 mb-4">
+                                <span id="project-type" class="px-3 sm:px-4 py-1 sm:py-2 rounded-full text-xs sm:text-sm font-semibold text-white"></span>
+                                <span id="project-duration" class="text-luxury-600 text-xs sm:text-sm">
+                                    <i class="fas fa-clock mr-1"></i>
+                                </span>
+                            </div>
+                            <h1 id="project-title" class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-3 sm:mb-4 text-luxury-900"></h1>
+                            <p id="project-subtitle" class="text-lg sm:text-xl text-gold-600 font-semibold mb-3 sm:mb-4"></p>
+                            <p id="project-description" class="text-sm sm:text-base text-luxury-700 leading-relaxed mb-4 sm:mb-6"></p>
+                            
+                            <!-- Action Buttons -->
+                            <div class="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4">
+                                <a id="github-btn" href="#" class="bg-gold-gradient text-black px-4 sm:px-6 py-2 sm:py-3 rounded-full font-semibold hover:scale-105 transition-transform duration-300 shadow-lg text-sm sm:text-base text-center">
+                                    <i class="fab fa-github mr-2"></i>View Code
+                                </a>
+                                <a id="live-btn" href="#" class="glass text-black px-4 sm:px-6 py-2 sm:py-3 rounded-full font-semibold hover:scale-105 transition-transform duration-300 border border-white/20 text-sm sm:text-base text-center">
+                                    <i class="fas fa-external-link-alt mr-2"></i>Live Demo
+                                </a>
+                                <a id="download-btn" href="#" class="glass text-black px-4 sm:px-6 py-2 sm:py-3 rounded-full font-semibold hover:scale-105 transition-transform duration-300 border border-white/20 text-sm sm:text-base text-center">
+                                    <i class="fas fa-download mr-2"></i>Download
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Gallery -->
+                <div id="gallery-section" class="glass rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 mb-8 sm:mb-12 hover-lift hidden">
+                    <h2 class="text-xl sm:text-2xl font-bold text-luxury-900 mb-4 sm:mb-6">
+                        <i class="fas fa-images text-gold-500 mr-2 sm:mr-3"></i>Project Gallery
+                    </h2>
+                    <div id="project-gallery" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4">
+                        <!-- Gallery images will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Project Details Grid -->
+                <div class="grid lg:grid-cols-2 gap-6 sm:gap-8">
+                    <!-- Features -->
+                    <div class="glass rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 hover-lift">
+                        <h2 class="text-xl sm:text-2xl font-bold text-luxury-900 mb-4 sm:mb-6">
+                            <i class="fas fa-star text-gold-500 mr-2 sm:mr-3"></i>Key Features
+                        </h2>
+                        <ul id="project-features" class="space-y-2 sm:space-y-3">
+                            <!-- Features will be populated by JavaScript -->
+                        </ul>
+                    </div>
+
+                    <!-- Technologies -->
+                    <div class="glass rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 hover-lift">
+                        <h2 class="text-xl sm:text-2xl font-bold text-luxury-900 mb-4 sm:mb-6">
+                            <i class="fas fa-code text-gold-500 mr-2 sm:mr-3"></i>Technologies Used
+                        </h2>
+                        <div id="project-technologies" class="flex flex-wrap gap-2 sm:gap-3">
+                            <!-- Technologies will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Pricing (if applicable) -->
+                    <div id="pricing-section" class="glass rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 hover-lift hidden">
+                        <h2 class="text-xl sm:text-2xl font-bold text-luxury-900 mb-4 sm:mb-6">
+                            <i class="fas fa-dollar-sign text-gold-500 mr-2 sm:mr-3"></i>Pricing
+                        </h2>
+                        <div id="pricing-content" class="space-y-3 sm:space-y-4">
+                            <!-- Pricing will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Contact (if applicable) -->
+                    <div id="contact-section" class="glass rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 hover-lift hidden">
+                        <h2 class="text-xl sm:text-2xl font-bold text-luxury-900 mb-4 sm:mb-6">
+                            <i class="fas fa-envelope text-gold-500 mr-2 sm:mr-3"></i>Contact
+                        </h2>
+                        <div id="contact-content" class="space-y-3 sm:space-y-4">
+                            <!-- Contact will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Error State -->
+            <div id="error" class="hidden text-center py-16 sm:py-20">
+                <div class="glass rounded-2xl sm:rounded-3xl p-6 sm:p-8 max-w-md mx-auto">
+                    <i class="fas fa-exclamation-triangle text-red-500 text-4xl sm:text-5xl md:text-6xl mb-4"></i>
+                    <h2 class="text-xl sm:text-2xl font-bold text-luxury-900 mb-3 sm:mb-4">Project Not Found</h2>
+                    <p class="text-sm sm:text-base text-luxury-600 mb-4 sm:mb-6">The project you're looking for doesn't exist or has been moved.</p>
+                    <a href="index.html" class="bg-gold-gradient text-black px-4 sm:px-6 py-2 sm:py-3 rounded-full font-semibold hover:scale-105 transition-transform duration-300 shadow-lg text-sm sm:text-base">
+                        <i class="fas fa-arrow-left mr-2"></i>Back to Portfolio
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Get project ID from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const projectId = urlParams.get('id');
+
+        // Load project data
+        async function loadProject() {
+            try {
+                // Check if we're running from file:// protocol
+                if (window.location.protocol === 'file:') {
+                    console.log('Running from file:// protocol, using fallback data');
+                    const fallbackData = await loadFallbackData();
+                    const project = fallbackData.projects.find(p => p.id === projectId);
+                    
+                    if (project) {
+                        displayProject(project);
+                        return;
+                    } else {
+                        showError();
+                        return;
+                    }
+                }
+
+                // Try to fetch the JSON file with cache-busting (only for http/https)
+                const timestamp = new Date().getTime();
+                const response = await fetch(`projects-data.json?t=${timestamp}`, {
+                    cache: 'no-cache',
+                    headers: {
+                        'Cache-Control': 'no-cache, no-store, must-revalidate',
+                        'Pragma': 'no-cache',
+                        'Expires': '0'
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                if (!data.projects || !Array.isArray(data.projects)) {
+                    throw new Error('Invalid JSON structure');
+                }
+                
+                const project = data.projects.find(p => p.id === projectId);
+                
+                if (!project) {
+                    console.error('Project not found:', projectId);
+                    showError();
+                    return;
+                }
+                
+                displayProject(project);
+            } catch (error) {
+                console.error('Error loading project:', error);
+                
+                // Fallback: try to load from a local data object
+                try {
+                    console.log('Using fallback data due to fetch error');
+                    const fallbackData = await loadFallbackData();
+                    const project = fallbackData.projects.find(p => p.id === projectId);
+                    
+                    if (project) {
+                        displayProject(project);
+                        return;
+                    }
+                } catch (fallbackError) {
+                    console.error('Fallback data loading failed:', fallbackError);
+                }
+                
+                showError();
+            }
+        }
+
+        // Fallback data loading function
+        async function loadFallbackData() {
+            // This is a fallback in case the JSON file can't be loaded
+            console.log('Using fallback data - JSON file may not be accessible');
+            return {
+                projects: [
+                    {
+                        id: "pew-pos",
+                        title: "PEW POS Management System",
+                        subtitle: "Powerful Windows POS Software for Cafés, Retail Shops, and Small to Medium Businesses",
+                        description: "PEW POS is an all-in-one Point of Sale (POS) management system designed for Windows (supports Windows 7 to 11). It helps businesses streamline sales, manage inventory, and generate reports with ease. Whether you run a café, retail shop, or small business, PEW POS makes managing operations fast, simple, and reliable.",
+                        type: "Desktop App",
+                        duration: "6 months (2024)",
+                        technologies: ["C#", "Windows Forms", "SQLite"],
+                        features: [
+                            "Product, stock, and category management",
+                            "Sales processing with bill printing (80 x 80 mm)",
+                            "Daily and shift-based reports",
+                            "Employee and department management",
+                            "Sales analysis and comparison tools",
+                            "User and role management",
+                            "Backup and restore functionality",
+                            "Tax configuration and shift-closing reports"
+                        ],
+                        pricing: {
+                            trial: "FREE for 1 month",
+                            license: "$19 lifetime license"
+                        },
+                        contact: "seavpeavpech24@gmail.com",
+                        downloadUrl: "https://drive.google.com/file/d/1LdCcIOIXcFAzP4Dkm3p15W9JgnL3SgpF/view?usp=drive_link",
+                        // githubUrl: "#",
+                        image: "https://via.placeholder.com/600x400/001F3F/FFFFFF?text=PEW+POS+System",
+                        icon: "fas fa-cash-register",
+                        color: "from-gold-500 to-gold-700",
+                        gallery: [
+                            // {
+                            //     "url": "assets/images/logo.png",
+                            //     // "alt": "PEW POS Dashboard"
+                            // },
+                            {
+                                "url": "assets/images/11.jpg",
+                                // "alt": "PEW POS Dashboard"
+                            },
+                            {
+                                "url": "assets/images/22.jpg",
+                                // "alt": "PEW POS Sales Interface"
+                            },
+                            {
+                                "url": "assets/images/33.jpg",
+                                // "alt": "PEW POS Inventory Management"
+                            },
+                            {
+                                "url": "assets/images/44.jpg",
+                                // "alt": "PEW POS Reports"
+                            },
+                            {
+                                "url": "assets/images/55.jpg",
+                                // "alt": "PEW POS Dashboard"
+                            },
+                            {
+                                "url": "assets/images/66.jpg",
+                                // "alt": "PEW POS Sales Interface"
+                            },
+                            {
+                                "url": "assets/images/77.jpg",
+                                // "alt": "PEW POS Inventory Management"
+                            },
+                            {
+                                "url": "assets/images/88.jpg",
+                                // "alt": "PEW POS Reports"
+                            },
+                            {
+                                "url": "assets/images/99.jpg",
+                                // "alt": "PEW POS Dashboard"
+                            },
+                            {
+                                "url": "assets/images/1010.jpg",
+                                // "alt": "PEW POS Sales Interface"
+                            },
+                            {
+                                "url": "assets/images/1111.jpg",
+                                // "alt": "PEW POS Inventory Management"
+                            },
+                            {
+                                "url": "assets/images/1212.jpg",
+                                // "alt": "PEW POS Reports"
+                            }
+                        ]
+                    },
+                    {
+                        id: "ecommerce",
+                        title: "E-commerce Website",
+                        subtitle: "WordPress E-commerce Platform",
+                        description: "Developed a dynamic e-commerce website using WordPress, featuring product listings, secure payment integration, and a responsive design for seamless user experience.",
+                        type: "Web App",
+                        duration: "One week (October 2024)",
+                        technologies: ["WordPress", "PHP", "MySQL", "WooCommerce"],
+                        features: [
+                            "WordPress-based e-commerce platform",
+                            "Product listings and catalog",
+                            "Secure payment integration",
+                            "Responsive design for all devices",
+                            "User-friendly interface",
+                            "International collaboration project",
+                            "Cross-cultural team development",
+                            "Singapore exchange program project"
+                        ],
+                        // githubUrl: "#",
+                        // liveUrl: "#",
+                        image: "https://via.placeholder.com/600x400/001F3F/FFFFFF?text=E-commerce+Website",
+                        icon: "fas fa-shopping-cart",
+                        color: "from-accent-500 to-accent-700",
+                        team: "5 members",
+                        location: "Singapore (Exchange Program)",
+                        gallery: [
+                            {
+                                "url": "assets/images/world_press_project.png",
+                                "alt": "E-commerce Homepage"
+                            }
+                        ]
+                    },
+                    {
+                        id: "hotel-management",
+                        title: "Hotel Management System",
+                        subtitle: "C# Desktop Application",
+                        description: "Designed and implemented a Hotel Management System using C# to manage room bookings, customer check-ins, check-outs, and staff assignments efficiently. Features include a user-friendly interface and real-time data updates.",
+                        type: "Desktop App",
+                        duration: "3 months (September 2024)",
+                        technologies: ["C#", "Windows Forms", "SQL Server"],
+                        features: [
+                            "Room booking and reservation management",
+                            "Customer check-in/check-out system",
+                            "Staff assignment and management",
+                            "Real-time data updates",
+                            "User-friendly interface",
+                            "Database management",
+                            "Reporting system",
+                            "Currently in development"
+                        ],
+                        // githubUrl: "#",
+                        // liveUrl: "#",
+                        image: "https://via.placeholder.com/600x400/001F3F/FFFFFF?text=Hotel+Management",
+                        icon: "fas fa-hotel",
+                        color: "from-purple-500 to-purple-700",
+                        team: "1 member",
+                        status: "In Development",
+                        releaseDate: "Not released yet",
+                        "gallery": [
+                            {
+                                "url": "assets/images/hotel_project.png",
+                                "alt": "Room Management Form"
+                            },
+                            {
+                                "url": "assets/images/hotel1.png",
+                                // "alt": "Room Management Form"
+                            },
+                            {
+                                "url": "assets/images/hotel2.png",
+                                // "alt": "Room Management Form"
+                            }
+                        ]
+                    },
+                    {
+                        id: "good-budget",
+                        title: "Good Budget",
+                        subtitle: "Android Budgeting App",
+                        description: "Good Budget is a user-friendly budgeting app designed to help you manage your finances efficiently. It allows you to track your income, plan spending, and monitor transactions with ease. Whether you're saving for a goal or managing daily expenses, Good Budget provides a clear overview of your financial health, empowering you to make smarter money decisions.",
+                        type: "Mobile App",
+                        duration: "1 month (2024)",
+                        technologies: ["Flutter", "Dart", "SQLite", "Provider"],
+                        features: [
+                            "Income tracking and management",
+                            "Expense planning and monitoring",
+                            "Transaction history and analysis",
+                            "Financial health overview",
+                            "Goal setting and tracking",
+                            "Smart money decisions support",
+                            "User-friendly interface",
+                            "APK available for download"
+                        ],
+                        // githubUrl: "#",
+                        downloadUrl: "https://drive.google.com/drive/folders/1lPgtF9ID62us3riMc0sFjWWeLhWewrEP?usp=sharing",
+                        image: "https://via.placeholder.com/600x400/001F3F/FFFFFF?text=Good+Budget",
+                        icon: "fas fa-mobile-alt",
+                        color: "from-blue-500 to-blue-700",
+                        platform: "Android",
+                        availability: "APK available on Google Drive"
+                    },
+                    {
+                        id: "opportune",
+                        title: "Opportune",
+                        subtitle: "Global Opportunities Blog",
+                        description: "Opportune helps you discover and keep track of global opportunities like scholarships, internships, and exchange programs. Never miss out on life-changing experiences by having all the details at your fingertips.",
+                        type: "Web Blog",
+                        duration: "3 months (2024)",
+                        technologies: ["Blogger", "HTML", "CSS", "JavaScript"],
+                        features: [
+                            "Global opportunities discovery",
+                            "Scholarship tracking and updates",
+                            "Internship program listings",
+                            "Exchange program information",
+                            "Life-changing experiences guide",
+                            "Regular updates and notifications",
+                            "User-friendly blog interface",
+                            "Mobile-responsive design"
+                        ],
+                        // githubUrl: "#",
+                        liveUrl: "https://opportune2025.blogspot.com",
+                        image: "https://via.placeholder.com/600x400/001F3F/FFFFFF?text=Opportune",
+                        icon: "fas fa-briefcase",
+                        color: "from-orange-500 to-orange-700",
+                        platform: "Blogger",
+                        contentType: "Blog"
+                    },
+                    {
+                        id: "madein-scanner",
+                        title: "MadeInScanner",
+                        subtitle: "Product Origin Scanner App",
+                        description: "MadeInScanner is your quick and easy tool to identify a product's country of origin. Just scan the barcode, and the app instantly detects where it was made. Keep track of your scans with a built-in history, and make smarter choices when shopping. Perfect for anyone who wants to know more about the products they buy.",
+                        type: "Mobile App",
+                        duration: "2 months (2024)",
+                        technologies: ["Flutter", "Dart", "Barcode Scanner", "SQLite"],
+                        features: [
+                            "Barcode scanning functionality",
+                            "Product origin identification",
+                            "Country of origin detection",
+                            "Scan history tracking",
+                            "Smart shopping decisions",
+                            "Product information database",
+                            "User-friendly interface",
+                            "Offline scanning capability"
+                        ],
+                        // githubUrl: "#",
+                        downloadUrl: "https://drive.google.com/drive/folders/1V6YtDH0qbaqIS_AZjTPUkO9hwm0piRAp?usp=sharing",
+                        image: "https://via.placeholder.com/600x400/001F3F/FFFFFF?text=MadeInScanner",
+                        icon: "fas fa-qrcode",
+                        color: "from-indigo-500 to-indigo-700",
+                        platform: "Mobile",
+                        category: "Utility"
+                    }
+                    ,
+                    {
+                        id: "cambodia-destinations",
+                        title: "Cambodia Destinations",
+                        subtitle: "Laravel 12 Tourism CMS + Public Site",
+                        description: "A Laravel 12 tourism CMS and public site for exploring Cambodia’s destinations, galleries, travel tips, and more. Includes an admin panel, newsletter, contact inquiries, backups, and an AI assistant powered by Gemini.",
+                        type: "Repository",
+                        duration: "3 months (2025)",
+                        technologies: ["Laravel 12", "PHP 8.2+", "Composer 2+", "Node 18+", "SQLite/MySQL", "Tailwind CSS", "Gemini API", "OpenWeather"],
+                        features: [
+                            "Destinations CMS with categories and galleries",
+                            "Admin panel with users, backups, and content management",
+                            "AI assistant (Gemini) for destination queries",
+                            "Weather widget via OpenWeather",
+                            "Newsletter subscriptions and contact inquiries",
+                            "SEO-friendly Blade views",
+                            "Leaflet interactive map with grouped layers"
+                        ],
+                        githubUrl: "https://github.com/seavpeavpech24-bot/cambodia-destinations",
+                        liveUrl: "https://youtu.be/zo-2n49XmpY",
+                        image: "https://via.placeholder.com/600x400/001F3F/FFFFFF?text=Cambodia+Destinations",
+                        icon: "fas fa-map-marked-alt",
+                        color: "from-emerald-500 to-emerald-700"
+                    },
+                    {
+                        id: "realtime-chat-laravel-vue",
+                        title: "Realtime Chat (Laravel + Vue)",
+                        subtitle: "Pusher-powered Real-time Chat Application",
+                        description: "A real-time chat application built with Laravel (backend) and Vue 3 (frontend) using Pusher for real-time features, with auth, private chats, typing indicators, and message history.",
+                        type: "Repository",
+                        duration: "2 hours (30 Sep 2025)",
+                        technologies: ["Laravel 11+", "Sanctum", "MySQL/SQLite", "Pusher", "Vue 3", "Pinia", "Vue Router", "Axios", "Tailwind CSS", "Laravel Echo"],
+                        features: [
+                            "User registration and authentication",
+                            "Real-time messaging with Pusher",
+                            "User online status and typing indicators",
+                            "Private conversations and message history",
+                            "Responsive UI with Tailwind CSS"
+                        ],
+                        githubUrl: "https://github.com/seavpeavpech24-bot/realtime-chat-laravel-vue",
+                        image: "https://via.placeholder.com/600x400/001F3F/FFFFFF?text=Realtime+Chat",
+                        icon: "fas fa-comments",
+                        color: "from-sky-500 to-sky-700"
+                    }
+                ]
+            };
+        }
+
+        function displayProject(project) {
+            // Hide loading, show content
+            document.getElementById('loading').classList.add('hidden');
+            document.getElementById('project-content').classList.remove('hidden');
+
+            // Update page title
+            document.title = `${project.title} - SEAVPEAV PECH`;
+
+            // Update project header
+            document.getElementById('project-title').textContent = project.title;
+            document.getElementById('project-subtitle').textContent = project.subtitle;
+            document.getElementById('project-description').textContent = project.description;
+            document.getElementById('project-duration').textContent = project.duration;
+            
+            // Update project image and icon
+            const projectImage = document.getElementById('project-image');
+            const projectIcon = document.getElementById('project-icon');
+            projectImage.className = `w-full h-64 rounded-2xl bg-gradient-to-br ${project.color} flex items-center justify-center`;
+            projectIcon.className = `${project.icon} text-white text-6xl`;
+
+            // Update project type
+            const projectType = document.getElementById('project-type');
+            projectType.textContent = project.type;
+            projectType.className = `px-4 py-2 rounded-full text-sm font-semibold text-white ${project.color.replace('from-', 'bg-').replace(' to-', '-')}`;
+
+            // Update features
+            const featuresList = document.getElementById('project-features');
+            featuresList.innerHTML = project.features.map(feature => 
+                `<li class="flex items-center text-luxury-700">
+                    <i class="fas fa-check text-gold-500 mr-3"></i>
+                    ${feature}
+                </li>`
+            ).join('');
+
+            // Update technologies
+            const technologiesContainer = document.getElementById('project-technologies');
+            technologiesContainer.innerHTML = project.technologies.map(tech => 
+                `<span class="px-4 py-2 bg-gold-100 text-gold-800 rounded-full text-sm font-medium">${tech}</span>`
+            ).join('');
+
+            // Update action buttons
+            const githubBtn = document.getElementById('github-btn');
+            const liveBtn = document.getElementById('live-btn');
+            const downloadBtn = document.getElementById('download-btn');
+
+            if (project.githubUrl) {
+                githubBtn.href = project.githubUrl;
+                githubBtn.classList.remove('hidden');
+            } else {
+                githubBtn.classList.add('hidden');
+            }
+
+            if (project.liveUrl) {
+                liveBtn.href = project.liveUrl;
+                liveBtn.classList.remove('hidden');
+            } else {
+                liveBtn.classList.add('hidden');
+            }
+
+            if (project.downloadUrl) {
+                downloadBtn.href = project.downloadUrl;
+                downloadBtn.classList.remove('hidden');
+            } else {
+                downloadBtn.classList.add('hidden');
+            }
+
+            // Show pricing section if applicable
+            if (project.pricing) {
+                const pricingSection = document.getElementById('pricing-section');
+                const pricingContent = document.getElementById('pricing-content');
+                pricingContent.innerHTML = `
+                    <div class="p-4 bg-gold-500/10 rounded-xl border border-gold-500/20">
+                        <p class="text-luxury-900">
+                            Try it <span class="font-bold text-gold-600">${project.pricing.trial}</span>. 
+                            After the trial, get a lifetime license for just <span class="font-bold text-gold-600">${project.pricing.license}</span>.
+                        </p>
+                    </div>
+                `;
+                pricingSection.classList.remove('hidden');
+            }
+
+            // Show contact section if applicable
+            if (project.contact) {
+                const contactSection = document.getElementById('contact-section');
+                const contactContent = document.getElementById('contact-content');
+                contactContent.innerHTML = `
+                    <div class="p-4 bg-white/5 rounded-xl">
+                        <p class="text-luxury-900">
+                            For inquiries or lifetime license purchase, contact us at: 
+                            <a href="mailto:${project.contact}" class="text-gold-600 hover:text-gold-500 underline">${project.contact}</a>
+                        </p>
+                    </div>
+                `;
+                contactSection.classList.remove('hidden');
+            }
+
+            // Show gallery section if applicable
+            if (project.gallery && project.gallery.length > 0) {
+                const gallerySection = document.getElementById('gallery-section');
+                const galleryContainer = document.getElementById('project-gallery');
+                
+                galleryContainer.innerHTML = project.gallery.map((image, index) => `
+                    <div class="relative group cursor-pointer overflow-hidden rounded-lg hover:scale-105 transition-transform duration-300">
+                        <img src="${image.url}" alt="${image.alt || project.title} - Image ${index + 1}" 
+                             class="w-full h-24 sm:h-32 md:h-40 object-cover">
+                        <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <i class="fas fa-expand text-white text-xl"></i>
+                        </div>
+                    </div>
+                `).join('');
+                
+                gallerySection.classList.remove('hidden');
+                
+                // Add click handlers for image expansion
+                galleryContainer.querySelectorAll('img').forEach((img, index) => {
+                    img.addEventListener('click', () => {
+                        showImageModal(project.gallery[index], project.gallery, index);
+                    });
+                });
+            }
+        }
+
+        function showError() {
+            document.getElementById('loading').classList.add('hidden');
+            document.getElementById('error').classList.remove('hidden');
+        }
+
+        function showImageModal(currentImage, allImages, currentIndex) {
+            // Create modal if it doesn't exist
+            let modal = document.getElementById('image-modal');
+            if (!modal) {
+                modal = document.createElement('div');
+                modal.id = 'image-modal';
+                modal.className = 'modal-overlay';
+                modal.innerHTML = `
+                    <div class="modal-content">
+                        <button id="close-modal" class="absolute top-4 right-4 text-white text-2xl hover:text-gold-400 transition-colors z-10">
+                            <i class="fas fa-times"></i>
+                        </button>
+                        <button id="prev-image" class="absolute left-4 top-1/2 transform -translate-y-1/2 text-white text-2xl hover:text-gold-400 transition-colors z-10">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button id="next-image" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-white text-2xl hover:text-gold-400 transition-colors z-10">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        <img id="modal-image" src="" alt="" class="max-w-full max-h-full object-contain">
+                        <div id="image-counter" class="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-white text-sm bg-black/50 px-3 py-1 rounded-full"></div>
+                    </div>
+                `;
+                document.body.appendChild(modal);
+
+                // Add event listeners
+                document.getElementById('close-modal').addEventListener('click', closeModal);
+                document.getElementById('prev-image').addEventListener('click', () => navigateImage(-1));
+                document.getElementById('next-image').addEventListener('click', () => navigateImage(1));
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) closeModal();
+                });
+
+                // Keyboard navigation
+                document.addEventListener('keydown', handleKeydown);
+            }
+
+            // Set current image data
+            modal.dataset.currentIndex = currentIndex;
+            modal.dataset.allImages = JSON.stringify(allImages);
+
+            // Update modal content
+            const modalImage = document.getElementById('modal-image');
+            const imageCounter = document.getElementById('image-counter');
+            
+            modalImage.src = currentImage.url;
+            modalImage.alt = currentImage.alt || 'Project Image';
+            imageCounter.textContent = `${currentIndex + 1} / ${allImages.length}`;
+
+            // Show modal
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+
+            function closeModal() {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            function navigateImage(direction) {
+                const images = JSON.parse(modal.dataset.allImages);
+                let newIndex = parseInt(modal.dataset.currentIndex) + direction;
+                
+                if (newIndex < 0) newIndex = images.length - 1;
+                if (newIndex >= images.length) newIndex = 0;
+                
+                modal.dataset.currentIndex = newIndex;
+                modalImage.src = images[newIndex].url;
+                modalImage.alt = images[newIndex].alt || 'Project Image';
+                imageCounter.textContent = `${newIndex + 1} / ${images.length}`;
+            }
+
+            function handleKeydown(e) {
+                if (!modal.classList.contains('active')) return;
+                
+                switch(e.key) {
+                    case 'Escape':
+                        closeModal();
+                        break;
+                    case 'ArrowLeft':
+                        navigateImage(-1);
+                        break;
+                    case 'ArrowRight':
+                        navigateImage(1);
+                        break;
+                }
+            }
+        }
+
+        // Force refresh function for development
+        function forceRefresh() {
+            console.log('Force refreshing project data...');
+            // Clear any cached data
+            if ('caches' in window) {
+                caches.keys().then(names => {
+                    names.forEach(name => {
+                        caches.delete(name);
+                    });
+                });
+            }
+            // Reload the project
+            loadProject();
+        }
+
+        // Add keyboard shortcut for force refresh (Ctrl+R or Cmd+R)
+        document.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'r') {
+                e.preventDefault();
+                forceRefresh();
+            }
+        });
+
+        // Load project when page loads
+        console.log('Project ID from URL:', projectId);
+        console.log('Loading project data with cache-busting...');
+        
+        // Show development notice if running from file://
+        if (window.location.protocol === 'file:') {
+            console.log('🔧 Development Mode: Running from file:// protocol');
+            console.log('💡 For live JSON updates, run a local server:');
+            console.log('   - Python: python -m http.server 8000');
+            console.log('   - Node.js: npx serve .');
+            console.log('   - VS Code: Live Server extension');
+            console.log('   Then open: http://localhost:8000/project-details.html?id=' + projectId);
+        }
+        
+        if (projectId) {
+            loadProject();
+        } else {
+            console.error('No project ID provided in URL');
+            showError();
+        }
+    </script>
+</body>
+</html>
+
+
+
+
