@@ -57,9 +57,8 @@ This portfolio is designed to be easily deployed to GitHub Pages:
 
 ## Contact
 
-- **Email**: your.email@example.com
-- **LinkedIn**: [Your LinkedIn Profile](https://linkedin.com/in/yourprofile)
-- **GitHub**: [Your GitHub Profile](https://github.com/yourusername)
+- **Email**: seavpeavpech24@gmail.com
+- **GitHub**: [https://github.com/seavpeavpech24-bot](https://github.com/seavpeavpech24-bot)
 
 ## License
 
