@@ -289,7 +289,10 @@
 
                 // Try to fetch the JSON file with cache-busting (only for http/https)
                 const timestamp = new Date().getTime();
-                const response = await fetch(`projects-data.json?t=${timestamp}`, {
+                // Get the base URL for GitHub Pages compatibility
+                const baseUrl = window.location.pathname.includes('github.io') ? 
+                    `${window.location.pathname.split('/').slice(0, -1).join('/')}/` : '';
+                const response = await fetch(`${baseUrl}projects-data.json?t=${timestamp}`, {
                     cache: 'no-cache',
                     headers: {
                         'Cache-Control': 'no-cache, no-store, must-revalidate',
@@ -854,15 +857,25 @@
                 const gallerySection = document.getElementById('gallery-section');
                 const galleryContainer = document.getElementById('project-gallery');
                 
-                galleryContainer.innerHTML = project.gallery.map((image, index) => `
+                // Get the base URL for GitHub Pages compatibility
+                const baseUrl = window.location.pathname.includes('github.io') ? 
+                    `${window.location.pathname.split('/').slice(0, -1).join('/')}/` : '';
+                
+                galleryContainer.innerHTML = project.gallery.map((image, index) => {
+                    // Fix image URL for GitHub Pages
+                    const imageUrl = image.url.startsWith('http') ? 
+                        image.url : 
+                        `${baseUrl}${image.url}`;
+                    
+                    return `
                     <div class="relative group cursor-pointer overflow-hidden rounded-lg hover:scale-105 transition-transform duration-300">
-                        <img src="${image.url}" alt="${image.alt || project.title} - Image ${index + 1}" 
+                        <img src="${imageUrl}" alt="${image.alt || project.title} - Image ${index + 1}" 
                              class="w-full h-24 sm:h-32 md:h-40 object-cover">
                         <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                             <i class="fas fa-expand text-white text-xl"></i>
                         </div>
                     </div>
-                `).join('');
+                `}).join('');
                 
                 gallerySection.classList.remove('hidden');
                 
@@ -924,7 +937,16 @@
             const modalImage = document.getElementById('modal-image');
             const imageCounter = document.getElementById('image-counter');
             
-            modalImage.src = currentImage.url;
+            // Get the base URL for GitHub Pages compatibility
+            const baseUrl = window.location.pathname.includes('github.io') ? 
+                `${window.location.pathname.split('/').slice(0, -1).join('/')}/` : '';
+            
+            // Fix image URL for GitHub Pages
+            const imageUrl = currentImage.url.startsWith('http') ? 
+                currentImage.url : 
+                `${baseUrl}${currentImage.url}`;
+            
+            modalImage.src = imageUrl;
             modalImage.alt = currentImage.alt || 'Project Image';
             imageCounter.textContent = `${currentIndex + 1} / ${allImages.length}`;
 
@@ -944,8 +966,17 @@
                 if (newIndex < 0) newIndex = images.length - 1;
                 if (newIndex >= images.length) newIndex = 0;
                 
+                // Get the base URL for GitHub Pages compatibility
+                const baseUrl = window.location.pathname.includes('github.io') ? 
+                    `${window.location.pathname.split('/').slice(0, -1).join('/')}/` : '';
+                
+                // Fix image URL for GitHub Pages
+                const imageUrl = images[newIndex].url.startsWith('http') ? 
+                    images[newIndex].url : 
+                    `${baseUrl}${images[newIndex].url}`;
+                
                 modal.dataset.currentIndex = newIndex;
-                modalImage.src = images[newIndex].url;
+                modalImage.src = imageUrl;
                 modalImage.alt = images[newIndex].alt || 'Project Image';
                 imageCounter.textContent = `${newIndex + 1} / ${images.length}`;
             }
